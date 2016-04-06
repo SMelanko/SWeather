@@ -31,7 +31,9 @@ ApplicationWindow {
 		text: qsTr("Test")
 
 		onClicked: {
-			getResponse(makeRequestUrl(cityId, apiKey, units))
+			var request = makeRequestUrl(cityId, apiKey, units)
+			console.log(request)
+			getResponse(request)
 		}
 	}
 
@@ -66,6 +68,13 @@ ApplicationWindow {
 		var data = JSON.parse(response)
 		var location = data.city.name + ', ' + data.city.country
 		console.log(location)
+		for (var i = 0; i < 8; ++i) {
+			console.log(data.list[i].dt_txt)
+			console.log("     Clouds: " + data.list[i].clouds.all)
+			console.log("Temperature: " + data.list[i].main.temp)
+			console.log("   Pressure: " + data.list[i].main.pressure)
+			console.log("       Wind: " + data.list[i].wind.speed)
+		}
 	}
 
 	//
@@ -97,9 +106,7 @@ ApplicationWindow {
 	function makeRequestUrl(cityId_, apiKey_, units_) {
 		var request = 'http://api.openweathermap.org/data/2.5/forecast/'
 		request += 'city?id=' + cityId_
-		if (!units_) {
-			request = '&units=' + units_
-		}
+		request += '&units=' + units_
 		request += '&APPID=' + apiKey_
 		return request
 	}

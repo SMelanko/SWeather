@@ -2,5 +2,37 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>HttpRequest.js</file>
+        <file>images/clouds.png</file>
+        <file>images/clouds@2x.png</file>
+        <file>images/clouds@3x.png</file>
+        <file>images/clouds@4x.png</file>
+        <file>images/little-rain.png</file>
+        <file>images/little-rain@2x.png</file>
+        <file>images/little-rain@3x.png</file>
+        <file>images/little-rain@4x.png</file>
+        <file>images/moon.png</file>
+        <file>images/moon@2x.png</file>
+        <file>images/moon@3x.png</file>
+        <file>images/moon@4x.png</file>
+        <file>images/partly-cloudy-day.png</file>
+        <file>images/partly-cloudy-day@2x.png</file>
+        <file>images/partly-cloudy-day@3x.png</file>
+        <file>images/partly-cloudy-day@4x.png</file>
+        <file>images/partly-cloudy-night.png</file>
+        <file>images/partly-cloudy-night@2x.png</file>
+        <file>images/partly-cloudy-night@3x.png</file>
+        <file>images/partly-cloudy-night@4x.png</file>
+        <file>images/rain.png</file>
+        <file>images/rain@2x.png</file>
+        <file>images/rain@3x.png</file>
+        <file>images/rain@4x.png</file>
+        <file>images/storm.png</file>
+        <file>images/storm@2x.png</file>
+        <file>images/storm@3x.png</file>
+        <file>images/storm@4x.png</file>
+        <file>images/sun.png</file>
+        <file>images/sun@2x.png</file>
+        <file>images/sun@3x.png</file>
+        <file>images/sun@4x.png</file>
     </qresource>
 </RCC>
