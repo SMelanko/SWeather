@@ -24,9 +24,92 @@ ApplicationWindow {
 	signal responseFailed(int status, string msg)
 	signal responseReceived(string response)
 
+	Rectangle {
+		id: _nebulosity
+		x: 10; y: 10
+		width: 64; height: 64
+		opacity: 1
+
+		property alias source: _nebulosityImg.source
+
+		Image {
+			id: _nebulosityImg
+			anchors.centerIn: parent
+			cache: false
+		}
+	}
+	Label {
+		id: _location
+		anchors {
+			top: parent.top
+			left: _nebulosity.right
+			leftMargin: 10
+		}
+	}
+
+	Label {
+		id: _temperature
+		x: 10
+		anchors.top: _nebulosity.bottom
+		text: qsTr("Temperature") +", " + "°C" + ":"
+	}
+	Label {
+		id: _temperatureVal
+		anchors {
+			top: _nebulosity.bottom
+			left: _temperature.right
+			leftMargin: 10
+		}
+	}
+
+	Label {
+		id: _pressure
+		x: 10
+		anchors.top: _temperature.bottom
+		text: qsTr("Pressure") +", " + qsTr("mmHg") + ":"
+	}
+	Label {
+		id: _pressureVal
+		anchors {
+			top: _temperature.bottom
+			left: _pressure.right
+			leftMargin: 10
+		}
+	}
+
+	Label {
+		id: _humidity
+		x: 10
+		anchors.top: _pressure.bottom
+		text: qsTr("Humidity") +", " + "%" + ":"
+	}
+	Label {
+		id: _humidityVal
+		anchors {
+			top: _pressure.bottom
+			left: _humidity.right
+			leftMargin: 10
+		}
+	}
+
+	Label {
+		id: _windy
+		x: 10
+		anchors.top: _humidity.bottom
+		text: qsTr("Windy") +", " + qsTr("m/s") + ":"
+	}
+	Label {
+		id: _windyVal
+		anchors {
+			top: _humidity.bottom
+			left: _windy.right
+			leftMargin: 10
+		}
+	}
+
 	Button {
 		id: _btn
-		width: parent.width / 2; height: parent.height / 4
+		width: parent.width / 2; height: parent.height / 10
 		anchors.centerIn: parent
 		text: qsTr("Test")
 
@@ -65,16 +148,38 @@ ApplicationWindow {
 	}
 
 	onResponseReceived: {
+		//console.log(response)
 		var data = JSON.parse(response)
 		var location = data.city.name + ', ' + data.city.country
-		console.log(location)
+
 		for (var i = 0; i < 8; ++i) {
 			console.log(data.list[i].dt_txt)
+			console.log("       Main: " + data.list[i].weather[0].main)
+			console.log("Description: " + data.list[i].weather[0].description)
+			console.log("       Icon: " + data.list[i].weather[0].icon)
 			console.log("     Clouds: " + data.list[i].clouds.all)
 			console.log("Temperature: " + data.list[i].main.temp)
 			console.log("   Pressure: " + data.list[i].main.pressure)
 			console.log("       Wind: " + data.list[i].wind.speed)
 		}
+
+		var weatherDesc = data.list[0].weather[0].main
+		var dt = new Date();
+		dt.setTime(Date.parse(data.list[0].dt_txt))
+		if (weatherDesc === "Clear") {
+			var time = dt.getHours()
+			if ((time >= 21 && time <= 23) || (time >= 0 && time < 6)) {
+				_nebulosity.source = "qrc:///images/moon.png"
+			} else {
+				_nebulosity.source = "qrc:///images/sun.png"
+			}
+		}
+
+		_location.text = location
+		_temperatureVal.text = data.list[0].main.temp
+		_pressureVal.text = data.list[0].main.pressure * 0.75
+		_humidityVal.text = data.list[0].main.humidity
+		_windyVal.text = data.list[0].wind.speed
 	}
 
 	//
