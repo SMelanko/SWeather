@@ -7,7 +7,7 @@ import "HttpRequest.js" as HttpRequest
 
 ApplicationWindow {
 	id: _applicationWindow
-	width: 240; height: 320
+	width: 640; height: 480
 	title: qsTr("SWeather")
 	visible: true
 
@@ -166,12 +166,18 @@ ApplicationWindow {
 		var weatherDesc = data.list[0].weather[0].main
 		var dt = new Date();
 		dt.setTime(Date.parse(data.list[0].dt_txt))
+		var time = dt.getHours()
 		if (weatherDesc === "Clear") {
-			var time = dt.getHours()
 			if ((time >= 21 && time <= 23) || (time >= 0 && time < 6)) {
 				_nebulosity.source = "qrc:///images/moon.png"
 			} else {
 				_nebulosity.source = "qrc:///images/sun.png"
+			}
+		} else if (weatherDesc === "Rain") {
+			if ((time >= 21 && time <= 23) || (time >= 0 && time < 6)) {
+				_nebulosity.source = "qrc:///images/rain.png"
+			} else {
+				_nebulosity.source = "qrc:///images/rain.png"
 			}
 		}
 
