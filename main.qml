@@ -17,6 +17,8 @@ ApplicationWindow {
 	property string apiKey: '6f75ff20ca01b304bb986d7019d05adc'
 	property string cityId: '706483' // Kharkiv, Ukraine.
 	property string units: 'metric'
+	property string fontFamily: "Open Sans"
+	property int fontSize: 16
 
 	//
 	// Signals interface.
@@ -25,8 +27,51 @@ ApplicationWindow {
 	signal responseReceived(string response)
 
 	Rectangle {
+		id: _banner
+		width: parent.width
+		height: 60
+		anchors.top: parent.top
+		gradient: Gradient {
+				GradientStop { position: 0.0; color: "black" }
+				GradientStop { position: 1.0; color: "#4c4c4c" }
+		}
+
+		Item {
+			id: _title
+			anchors.centerIn: parent
+			width: firstTitleText.width + _secondTitleText.width
+			height: firstTitleText.height + _secondTitleText.height
+
+			Text {
+				id: firstTitleText
+				anchors.verticalCenter: _title.verticalCenter
+				color: "#ffffff"
+				font {
+					family: "Abel"
+					pointSize: 40
+				}
+				text: "S"
+			}
+			Text {
+				id: _secondTitleText
+				anchors {
+					verticalCenter: _title.verticalCenter
+					left: firstTitleText.right
+				}
+				color: "#5caa15"
+				font {
+					family: "Abel"
+					pointSize: 40
+				}
+				text: "Weather"
+			}
+		}
+	}
+
+	Rectangle {
 		id: _nebulosity
-		x: 10; y: 10
+		x: 10
+		anchors.top: _banner.bottom
 		width: 64; height: 64
 		opacity: 1
 
@@ -41,9 +86,13 @@ ApplicationWindow {
 	Label {
 		id: _location
 		anchors {
-			top: parent.top
+			top: _banner.bottom
 			left: _nebulosity.right
 			leftMargin: 10
+		}
+		font {
+			family: fontFamily
+			pointSize: fontSize
 		}
 	}
 
@@ -51,6 +100,10 @@ ApplicationWindow {
 		id: _temperature
 		x: 10
 		anchors.top: _nebulosity.bottom
+		font {
+			family: fontFamily
+			pointSize: fontSize
+		}
 		text: qsTr("Temperature") +", " + "°C" + ":"
 	}
 	Label {
@@ -66,6 +119,10 @@ ApplicationWindow {
 		id: _pressure
 		x: 10
 		anchors.top: _temperature.bottom
+		font {
+			family: fontFamily
+			pointSize: fontSize
+		}
 		text: qsTr("Pressure") +", " + qsTr("mmHg") + ":"
 	}
 	Label {
@@ -81,6 +138,10 @@ ApplicationWindow {
 		id: _humidity
 		x: 10
 		anchors.top: _pressure.bottom
+		font {
+			family: fontFamily
+			pointSize: fontSize
+		}
 		text: qsTr("Humidity") +", " + "%" + ":"
 	}
 	Label {
@@ -96,6 +157,10 @@ ApplicationWindow {
 		id: _windy
 		x: 10
 		anchors.top: _humidity.bottom
+		font {
+			family: fontFamily
+			pointSize: fontSize
+		}
 		text: qsTr("Windy") +", " + qsTr("m/s") + ":"
 	}
 	Label {
@@ -110,7 +175,10 @@ ApplicationWindow {
 	Button {
 		id: _btn
 		width: parent.width / 2; height: parent.height / 10
-		anchors.centerIn: parent
+		anchors {
+			horizontalCenter: parent.horizontalCenter
+			bottom: parent.bottom
+		}
 		text: qsTr("Test")
 
 		onClicked: {
@@ -169,7 +237,7 @@ ApplicationWindow {
 		var time = dt.getHours()
 		if (weatherDesc === "Clear") {
 			if ((time >= 21 && time <= 23) || (time >= 0 && time < 6)) {
-				_nebulosity.source = "qrc:///images/moon.png"
+				_nebulosity.source = "qrc:///images/moon@2x.png"
 			} else {
 				_nebulosity.source = "qrc:///images/sun.png"
 			}
