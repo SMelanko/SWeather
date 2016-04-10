@@ -18,7 +18,7 @@ ApplicationWindow {
 	property string cityId: '706483' // Kharkiv, Ukraine.
 	property string units: 'metric'
 	property string fontFamily: "Open Sans"
-	property int fontSize: 16
+	property int fontSize: 18
 
 	//
 	// Signals interface.
@@ -26,6 +26,9 @@ ApplicationWindow {
 	signal responseFailed(int status, string msg)
 	signal responseReceived(string response)
 
+	//
+	// Title.
+	//
 	Rectangle {
 		id: _banner
 		width: parent.width
@@ -39,83 +42,87 @@ ApplicationWindow {
 		Item {
 			id: _title
 			anchors.centerIn: parent
-			width: firstTitleText.width + _secondTitleText.width
-			height: firstTitleText.height + _secondTitleText.height
+			width: _titleText.width
+			height: _titleText.height
 
 			Text {
-				id: firstTitleText
-				anchors.verticalCenter: _title.verticalCenter
-				color: "#ffffff"
-				font {
-					family: "Abel"
-					pointSize: 40
-				}
-				text: "S"
-			}
-			Text {
-				id: _secondTitleText
-				anchors {
-					verticalCenter: _title.verticalCenter
-					left: firstTitleText.right
-				}
+				id: _titleText
+				anchors.centerIn: _title
 				color: "#5caa15"
 				font {
-					family: "Abel"
-					pointSize: 40
+					family: fontFamily
+					pointSize: fontSize * 2
 				}
-				text: "Weather"
+				text: "SWeather"
 			}
 		}
 	}
 
-	Rectangle {
-		id: _nebulosity
-		x: 10
-		anchors.top: _banner.bottom
+	//
+	// Weather image.
+	//
+	Item {
+		id: _weatherIcon
+		anchors {
+			top: _banner.bottom
+			right: parent.right
+		}
 		width: 64; height: 64
-		opacity: 1
 
-		property alias source: _nebulosityImg.source
+		property alias source: _img.source
 
 		Image {
-			id: _nebulosityImg
+			id: _img
 			anchors.centerIn: parent
 			cache: false
 		}
 	}
-	Label {
+
+	//
+	// Temperature values.
+	//
+	Text {
 		id: _location
 		anchors {
+			left: parent.left
 			top: _banner.bottom
-			left: _nebulosity.right
 			leftMargin: 10
+			topMargin: 10
+			bottomMargin: 10
 		}
+		color: "#357ec7"
 		font {
 			family: fontFamily
-			pointSize: fontSize
+			pointSize: fontSize * 2
 		}
 	}
 
-	Label {
+	Text {
 		id: _temperature
-		x: 10
-		anchors.top: _nebulosity.bottom
+		x: 10;
+		anchors {
+			top: _location.bottom
+		}
 		font {
 			family: fontFamily
 			pointSize: fontSize
 		}
 		text: qsTr("Temperature") +", " + "°C" + ":"
 	}
-	Label {
+	Text {
 		id: _temperatureVal
 		anchors {
-			top: _nebulosity.bottom
 			left: _temperature.right
+			top: _location.bottom
 			leftMargin: 10
+		}
+		font {
+			family: fontFamily
+			pointSize: fontSize
 		}
 	}
 
-	Label {
+	Text {
 		id: _pressure
 		x: 10
 		anchors.top: _temperature.bottom
@@ -125,16 +132,20 @@ ApplicationWindow {
 		}
 		text: qsTr("Pressure") +", " + qsTr("mmHg") + ":"
 	}
-	Label {
+	Text {
 		id: _pressureVal
 		anchors {
 			top: _temperature.bottom
 			left: _pressure.right
 			leftMargin: 10
 		}
+		font {
+			family: fontFamily
+			pointSize: fontSize
+		}
 	}
 
-	Label {
+	Text {
 		id: _humidity
 		x: 10
 		anchors.top: _pressure.bottom
@@ -144,16 +155,20 @@ ApplicationWindow {
 		}
 		text: qsTr("Humidity") +", " + "%" + ":"
 	}
-	Label {
+	Text {
 		id: _humidityVal
 		anchors {
 			top: _pressure.bottom
 			left: _humidity.right
 			leftMargin: 10
 		}
+		font {
+			family: fontFamily
+			pointSize: fontSize
+		}
 	}
 
-	Label {
+	Text {
 		id: _windy
 		x: 10
 		anchors.top: _humidity.bottom
@@ -163,12 +178,16 @@ ApplicationWindow {
 		}
 		text: qsTr("Windy") +", " + qsTr("m/s") + ":"
 	}
-	Label {
+	Text {
 		id: _windyVal
 		anchors {
 			top: _humidity.bottom
 			left: _windy.right
 			leftMargin: 10
+		}
+		font {
+			family: fontFamily
+			pointSize: fontSize
 		}
 	}
 
@@ -237,21 +256,22 @@ ApplicationWindow {
 		var time = dt.getHours()
 		if (weatherDesc === "Clear") {
 			if ((time >= 21 && time <= 23) || (time >= 0 && time < 6)) {
-				_nebulosity.source = "qrc:///images/moon@2x.png"
+				_weatherIcon.source = "qrc:///images/moon.png"
 			} else {
-				_nebulosity.source = "qrc:///images/sun.png"
+				_weatherIcon.source = "qrc:///images/sun.png"
 			}
 		} else if (weatherDesc === "Rain") {
 			if ((time >= 21 && time <= 23) || (time >= 0 && time < 6)) {
-				_nebulosity.source = "qrc:///images/rain.png"
+				_weatherIcon.source = "qrc:///images/rain.png"
 			} else {
-				_nebulosity.source = "qrc:///images/rain.png"
+				_weatherIcon.source = "qrc:///images/rain.png"
 			}
 		}
 
 		_location.text = location
 		_temperatureVal.text = data.list[0].main.temp
-		_pressureVal.text = data.list[0].main.pressure * 0.75
+		var pressureVal = data.list[0].main.pressure * 0.75
+		_pressureVal.text = parseInt(pressureVal, 10)
 		_humidityVal.text = data.list[0].main.humidity
 		_windyVal.text = data.list[0].wind.speed
 	}
