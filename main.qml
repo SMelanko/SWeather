@@ -191,14 +191,25 @@ ApplicationWindow {
 		}
 	}
 
+	WeatherListView {
+			anchors {
+				left: parent.left
+				leftMargin: 5
+				top: _windy.bottom
+				topMargin: 5
+				right: parent.right
+				rightMargin: 5
+				bottom: parent.bottom
+				bottomMargin: 5
+			}
+			width: parent.width; height: parent.height / 2
+		}
+
 	Button {
 		id: _btn
-		width: parent.width / 2; height: parent.height / 10
-		anchors {
-			horizontalCenter: parent.horizontalCenter
-			bottom: parent.bottom
-		}
-		text: qsTr("Test")
+		x: 5; y: 5
+		width: 150; height: _banner.height - 10
+		text: qsTr("Update")
 
 		onClicked: {
 			var request = makeRequestUrl(cityId, apiKey, units)
@@ -239,17 +250,6 @@ ApplicationWindow {
 		var data = JSON.parse(response)
 		var location = data.city.name + ', ' + data.city.country
 
-		for (var i = 0; i < 8; ++i) {
-			console.log(data.list[i].dt_txt)
-			console.log("       Main: " + data.list[i].weather[0].main)
-			console.log("Description: " + data.list[i].weather[0].description)
-			console.log("       Icon: " + data.list[i].weather[0].icon)
-			console.log("     Clouds: " + data.list[i].clouds.all)
-			console.log("Temperature: " + data.list[i].main.temp)
-			console.log("   Pressure: " + data.list[i].main.pressure)
-			console.log("       Wind: " + data.list[i].wind.speed)
-		}
-
 		var weatherDesc = data.list[0].weather[0].main
 		var dt = new Date();
 		dt.setTime(Date.parse(data.list[0].dt_txt))
@@ -266,6 +266,12 @@ ApplicationWindow {
 			} else {
 				_weatherIcon.source = "qrc:///images/rain.png"
 			}
+		} else if (weatherDesc === "Clouds") {
+			if ((time >= 21 && time <= 23) || (time >= 0 && time < 6)) {
+				_weatherIcon.source = "qrc:///images/partly-cloudy-night.png"
+			} else {
+				_weatherIcon.source = "qrc:///images/partly-cloudy-day.png"
+			}
 		}
 
 		_location.text = location
@@ -274,6 +280,19 @@ ApplicationWindow {
 		_pressureVal.text = parseInt(pressureVal, 10)
 		_humidityVal.text = data.list[0].main.humidity
 		_windyVal.text = data.list[0].wind.speed
+
+		for (var j = 1; j < 9; ++j) {
+			//WeatherListModel.append({"time": timeCol, "temperature": 1, "icon": "qrc:///images/clouds.png"})
+			//WeatherListModel.setProperty(j, "temperature", data.list[j].main.temp)
+			console.log(data.list[j].dt_txt)
+			console.log("       Main: " + data.list[j].weather[0].main)
+			console.log("Description: " + data.list[j].weather[0].description)
+			console.log("       Icon: " + data.list[j].weather[0].icon)
+			console.log("     Clouds: " + data.list[j].clouds.all)
+			console.log("Temperature: " + data.list[j].main.temp)
+			console.log("   Pressure: " + data.list[j].main.pressure)
+			console.log("       Wind: " + data.list[j].wind.speed)
+		}
 	}
 
 	//

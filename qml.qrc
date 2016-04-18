@@ -34,5 +34,7 @@
         <file>images/sun@2x.png</file>
         <file>images/sun@3x.png</file>
         <file>images/sun@4x.png</file>
+        <file>WeatherListModel.qml</file>
+        <file>WeatherListView.qml</file>
     </qresource>
 </RCC>
