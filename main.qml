@@ -31,179 +31,48 @@ ApplicationWindow {
 	//
 	Rectangle {
 		id: _banner
-		width: parent.width
-		height: 60
+		width: parent.width; height: _title.height * 1.4
 		anchors.top: parent.top
 		gradient: Gradient {
 				GradientStop { position: 0.0; color: "black" }
 				GradientStop { position: 1.0; color: "#4c4c4c" }
 		}
 
-		Item {
+		Text {
 			id: _title
 			anchors.centerIn: parent
-			width: _titleText.width
-			height: _titleText.height
-
-			Text {
-				id: _titleText
-				anchors.centerIn: _title
-				color: "#5caa15"
-				font {
-					family: fontFamily
-					pointSize: fontSize * 2
-				}
-				text: "SWeather"
+			color: "#5caa15"
+			font {
+				family: fontFamily
+				pointSize: fontSize * 2
 			}
+			text: "SWeather"
 		}
 	}
 
-	//
-	// Weather image.
-	//
-	Item {
-		id: _weatherIcon
-		anchors {
-			top: _banner.bottom
-			right: parent.right
-		}
-		width: 64; height: 64
-
-		property alias source: _img.source
-
-		Image {
-			id: _img
-			anchors.centerIn: parent
-			cache: false
-		}
-	}
-
-	//
-	// Temperature values.
-	//
-	Text {
-		id: _location
+	CurrentWeatherWidget {
+		id: _currWeatherWgt
 		anchors {
 			left: parent.left
 			top: _banner.bottom
-			leftMargin: 10
-			topMargin: 10
-			bottomMargin: 10
-		}
-		color: "#357ec7"
-		font {
-			family: fontFamily
-			pointSize: fontSize * 2
-		}
-	}
-
-	Text {
-		id: _temperature
-		x: 10;
-		anchors {
-			top: _location.bottom
-		}
-		font {
-			family: fontFamily
-			pointSize: fontSize
-		}
-		text: qsTr("Temperature") +", " + "°C" + ":"
-	}
-	Text {
-		id: _temperatureVal
-		anchors {
-			left: _temperature.right
-			top: _location.bottom
-			leftMargin: 10
-		}
-		font {
-			family: fontFamily
-			pointSize: fontSize
-		}
-	}
-
-	Text {
-		id: _pressure
-		x: 10
-		anchors.top: _temperature.bottom
-		font {
-			family: fontFamily
-			pointSize: fontSize
-		}
-		text: qsTr("Pressure") +", " + qsTr("mmHg") + ":"
-	}
-	Text {
-		id: _pressureVal
-		anchors {
-			top: _temperature.bottom
-			left: _pressure.right
-			leftMargin: 10
-		}
-		font {
-			family: fontFamily
-			pointSize: fontSize
-		}
-	}
-
-	Text {
-		id: _humidity
-		x: 10
-		anchors.top: _pressure.bottom
-		font {
-			family: fontFamily
-			pointSize: fontSize
-		}
-		text: qsTr("Humidity") +", " + "%" + ":"
-	}
-	Text {
-		id: _humidityVal
-		anchors {
-			top: _pressure.bottom
-			left: _humidity.right
-			leftMargin: 10
-		}
-		font {
-			family: fontFamily
-			pointSize: fontSize
-		}
-	}
-
-	Text {
-		id: _windy
-		x: 10
-		anchors.top: _humidity.bottom
-		font {
-			family: fontFamily
-			pointSize: fontSize
-		}
-		text: qsTr("Windy") +", " + qsTr("m/s") + ":"
-	}
-	Text {
-		id: _windyVal
-		anchors {
-			top: _humidity.bottom
-			left: _windy.right
-			leftMargin: 10
-		}
-		font {
-			family: fontFamily
-			pointSize: fontSize
+			right: parent.right
+			bottom: parent.verticalCenter
 		}
 	}
 
 	WeatherListView {
-			anchors {
-				left: parent.left
-				leftMargin: 5
-				top: _windy.bottom
-				topMargin: 5
-				right: parent.right
-				rightMargin: 5
-				bottom: parent.bottom
-				bottomMargin: 5
-			}
-			width: parent.width; height: parent.height / 2
+		id: _listView
+		anchors {
+			left: parent.left
+			leftMargin: 5
+			top: _currWeatherWgt.bottom
+			topMargin: 5
+			right: parent.right
+			rightMargin: 5
+			bottom: parent.bottom
+			bottomMargin: 5
 		}
+	}
 
 	Button {
 		id: _btn
@@ -250,40 +119,11 @@ ApplicationWindow {
 		var data = JSON.parse(response)
 		var location = data.city.name + ', ' + data.city.country
 
-		var weatherDesc = data.list[0].weather[0].main
-		var dt = new Date();
-		dt.setTime(Date.parse(data.list[0].dt_txt))
-		var time = dt.getHours()
-		if (weatherDesc === "Clear") {
-			if ((time >= 21 && time <= 23) || (time >= 0 && time < 6)) {
-				_weatherIcon.source = "qrc:///images/moon.png"
-			} else {
-				_weatherIcon.source = "qrc:///images/sun.png"
-			}
-		} else if (weatherDesc === "Rain") {
-			if ((time >= 21 && time <= 23) || (time >= 0 && time < 6)) {
-				_weatherIcon.source = "qrc:///images/rain.png"
-			} else {
-				_weatherIcon.source = "qrc:///images/rain.png"
-			}
-		} else if (weatherDesc === "Clouds") {
-			if ((time >= 21 && time <= 23) || (time >= 0 && time < 6)) {
-				_weatherIcon.source = "qrc:///images/partly-cloudy-night.png"
-			} else {
-				_weatherIcon.source = "qrc:///images/partly-cloudy-day.png"
-			}
-		}
-
-		_location.text = location
-		_temperatureVal.text = data.list[0].main.temp
-		var pressureVal = data.list[0].main.pressure * 0.75
-		_pressureVal.text = parseInt(pressureVal, 10)
-		_humidityVal.text = data.list[0].main.humidity
-		_windyVal.text = data.list[0].wind.speed
+		_currWeatherWgt.setCurrWeatherParams(location, data.list[0])
 
 		for (var j = 1; j < 9; ++j) {
-			//WeatherListModel.append({"time": timeCol, "temperature": 1, "icon": "qrc:///images/clouds.png"})
-			//WeatherListModel.setProperty(j, "temperature", data.list[j].main.temp)
+			_listView.addRow(data.list[j])
+			/*
 			console.log(data.list[j].dt_txt)
 			console.log("       Main: " + data.list[j].weather[0].main)
 			console.log("Description: " + data.list[j].weather[0].description)
@@ -292,6 +132,7 @@ ApplicationWindow {
 			console.log("Temperature: " + data.list[j].main.temp)
 			console.log("   Pressure: " + data.list[j].main.pressure)
 			console.log("       Wind: " + data.list[j].wind.speed)
+			*/
 		}
 	}
 

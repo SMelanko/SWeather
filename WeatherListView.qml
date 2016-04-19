@@ -5,43 +5,17 @@ Rectangle {
 	color: "#dcdcdc"
 	radius: 3
 
+	ListModel {
+		id: _listModel
+	}
+
 	ListView {
 		id: _list
 		anchors.fill: parent
 		clip: true
 		focus: true
 
-/*
-		header: Rectangle {
-			width: parent.width
-			height: 30
-			gradient: Gradient {
-				GradientStop { position: 0; color: "black" }
-				GradientStop { position: 0.85; color: "gray" }
-			}
-			radius: 3
-			Text {
-				anchors.centerIn: parent
-				color: "white"
-				text: "Header"
-				font {
-					bold: true
-					pointSize: 20
-				}
-			}
-		}
-		headerPositioning: ListView.OverlayHeader
-*/
-/*
-		highlight: Rectangle {
-			width: parent.width
-			color: "lightgray"
-			radius: 3
-		}
-		highlightMoveDuration: 200
-		highlightMoveVelocity: 200
-*/
-		model: WeatherListModel{}
+		model: _listModel
 
 		delegate: Item {
 			width: _rect.width; height: 64
@@ -73,8 +47,28 @@ Rectangle {
 			}
 		}
 
-		onCurrentIndexChanged: {
-			console.log("onCurrentIndexChanged: " + currentIndex);
+		add: Transition {
+			NumberAnimation { properties: "y"; from: height; duration: 500 }
+			NumberAnimation { property: "opacity"; from: 0; to: 1.0; duration: 500 }
+			//NumberAnimation { property: "scale"; from: 0; to: 1.0; duration: 500 }
 		}
+	}
+
+	//
+	// JS implementation.
+	//
+
+	//! Appends new row with weather information.
+	// @1 - json object of the weather's parameters for corresponding time.
+	function addRow(data)
+	{
+		var dt = new Date()
+		dt.setTime(Date.parse(data.dt_txt))
+
+		_listModel.append({
+			time: dt.toTimeString(),
+			temperature: data.main.temp,
+			icon: "qrc:///images/moon@4x.png"
+		})
 	}
 }
