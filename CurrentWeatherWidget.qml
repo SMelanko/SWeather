@@ -3,29 +3,42 @@ import Qt.labs.controls 1.0
 import Qt.labs.controls.material 1.0
 
 Rectangle {
+	color: "transparent"
+	border {
+		width: 1
+		color: "magenta"
+	}
 
 	property string fontFamily: "Open Sans"
 	property int fontSize: 18
-	property int margin: 5
 
 	//
 	// Weather image.
 	//
 
-	Item {
+	Rectangle {
 		id: _weatherImg
 		anchors {
+			left: parent.horizontalCenter
 			top: parent.top
 			right: parent.right
+			bottom: parent.bottom
+			margins: 5
 		}
-		width: 64; height: 64
+		border {
+			width: 1
+			color: "red"
+		}
 
 		property alias source: _img.source
 
 		Image {
 			id: _img
+			width: _weatherImg.width / 1.5; height: _weatherImg.height / 1.5
 			anchors.centerIn: parent
-			cache: false
+			fillMode: Image.PreserveAspectFit
+			smooth: true
+			source: "qrc:///images/main/moon_cloud.png"
 		}
 	}
 
@@ -38,9 +51,6 @@ Rectangle {
 		anchors {
 			left: parent.left
 			top: parent.top
-			leftMargin: margin
-			topMargin: margin
-			bottomMargin: margin
 		}
 		color: "#357ec7"
 		font {
@@ -55,7 +65,6 @@ Rectangle {
 
 	Text {
 		id: _temperature
-		x: margin
 		anchors {
 			top: _location.bottom
 		}
@@ -70,7 +79,6 @@ Rectangle {
 		anchors {
 			left: _temperature.right
 			top: _location.bottom
-			leftMargin: margin
 		}
 		font {
 			family: fontFamily
@@ -84,7 +92,6 @@ Rectangle {
 
 	Text {
 		id: _pressure
-		x: margin
 		anchors.top: _temperature.bottom
 		font {
 			family: fontFamily
@@ -97,7 +104,6 @@ Rectangle {
 		anchors {
 			top: _temperature.bottom
 			left: _pressure.right
-			leftMargin: margin
 		}
 		font {
 			family: fontFamily
@@ -111,7 +117,6 @@ Rectangle {
 
 	Text {
 		id: _humidity
-		x: margin
 		anchors.top: _pressure.bottom
 		font {
 			family: fontFamily
@@ -124,7 +129,6 @@ Rectangle {
 		anchors {
 			top: _pressure.bottom
 			left: _humidity.right
-			leftMargin: margin
 		}
 		font {
 			family: fontFamily
@@ -138,7 +142,6 @@ Rectangle {
 
 	Text {
 		id: _windy
-		x: margin
 		anchors.top: _humidity.bottom
 		font {
 			family: fontFamily
@@ -151,7 +154,6 @@ Rectangle {
 		anchors {
 			top: _humidity.bottom
 			left: _windy.right
-			leftMargin: margin
 		}
 		font {
 			family: fontFamily

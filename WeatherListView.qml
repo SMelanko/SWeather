@@ -4,6 +4,10 @@ Rectangle {
 	id: _rect
 	color: "#dcdcdc"
 	radius: 3
+	border {
+		width: 1
+		color: "green"
+	}
 
 	ListModel {
 		id: _listModel
@@ -68,7 +72,7 @@ Rectangle {
 		_listModel.append({
 			time: dt.toTimeString(),
 			temperature: data.main.temp,
-			icon: "qrc:///images/moon@4x.png"
+			icon: "qrc:///images/list/moon@2x.png"
 		})
 	}
 }

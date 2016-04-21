@@ -11,10 +11,11 @@ int main(int argc, char *argv[])
 
 	QGuiApplication app(argc, argv);
 
+	qputenv("QT_AUTO_SCREEN_SCALE_FACTOR", "true");
 	qputenv("QT_LABS_CONTROLS_STYLE", "Material");
 
 	QQmlApplicationEngine engine;
-	engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
+	engine.load(QUrl(QStringLiteral("qrc:/qml/main.qml")));
 	if (engine.rootObjects().isEmpty()) {
 		return -1;
 	}

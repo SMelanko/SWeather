@@ -1,40 +1,75 @@
 <RCC>
-    <qresource prefix="/">
+    <qresource prefix="/qml">
         <file>main.qml</file>
         <file>HttpRequest.js</file>
-        <file>images/clouds.png</file>
-        <file>images/clouds@2x.png</file>
-        <file>images/clouds@3x.png</file>
-        <file>images/clouds@4x.png</file>
-        <file>images/little-rain.png</file>
-        <file>images/little-rain@2x.png</file>
-        <file>images/little-rain@3x.png</file>
-        <file>images/little-rain@4x.png</file>
-        <file>images/moon.png</file>
-        <file>images/moon@2x.png</file>
-        <file>images/moon@3x.png</file>
-        <file>images/moon@4x.png</file>
-        <file>images/partly-cloudy-day.png</file>
-        <file>images/partly-cloudy-day@2x.png</file>
-        <file>images/partly-cloudy-day@3x.png</file>
-        <file>images/partly-cloudy-day@4x.png</file>
-        <file>images/partly-cloudy-night.png</file>
-        <file>images/partly-cloudy-night@2x.png</file>
-        <file>images/partly-cloudy-night@3x.png</file>
-        <file>images/partly-cloudy-night@4x.png</file>
-        <file>images/rain.png</file>
-        <file>images/rain@2x.png</file>
-        <file>images/rain@3x.png</file>
-        <file>images/rain@4x.png</file>
-        <file>images/storm.png</file>
-        <file>images/storm@2x.png</file>
-        <file>images/storm@3x.png</file>
-        <file>images/storm@4x.png</file>
-        <file>images/sun.png</file>
-        <file>images/sun@2x.png</file>
-        <file>images/sun@3x.png</file>
-        <file>images/sun@4x.png</file>
         <file>WeatherListView.qml</file>
         <file>CurrentWeatherWidget.qml</file>
+    </qresource>
+    <qresource prefix="/">
+        <file>images/list/clouds.png</file>
+        <file>images/list/clouds@2x.png</file>
+        <file>images/list/clouds@3x.png</file>
+        <file>images/list/clouds@4x.png</file>
+        <file>images/list/little-rain.png</file>
+        <file>images/list/little-rain@2x.png</file>
+        <file>images/list/little-rain@3x.png</file>
+        <file>images/list/little-rain@4x.png</file>
+        <file>images/list/moon.png</file>
+        <file>images/list/moon@2x.png</file>
+        <file>images/list/moon@3x.png</file>
+        <file>images/list/moon@4x.png</file>
+        <file>images/list/partly-cloudy-day.png</file>
+        <file>images/list/partly-cloudy-day@2x.png</file>
+        <file>images/list/partly-cloudy-day@3x.png</file>
+        <file>images/list/partly-cloudy-day@4x.png</file>
+        <file>images/list/partly-cloudy-night.png</file>
+        <file>images/list/partly-cloudy-night@2x.png</file>
+        <file>images/list/partly-cloudy-night@3x.png</file>
+        <file>images/list/partly-cloudy-night@4x.png</file>
+        <file>images/list/rain.png</file>
+        <file>images/list/rain@2x.png</file>
+        <file>images/list/rain@3x.png</file>
+        <file>images/list/rain@4x.png</file>
+        <file>images/list/storm.png</file>
+        <file>images/list/storm@2x.png</file>
+        <file>images/list/storm@3x.png</file>
+        <file>images/list/storm@4x.png</file>
+        <file>images/list/sun.png</file>
+        <file>images/list/sun@2x.png</file>
+        <file>images/list/sun@3x.png</file>
+        <file>images/list/sun@4x.png</file>
+        <file>images/main/cloud_sun.png</file>
+        <file>images/main/cloud_thunder_rain.png</file>
+        <file>images/main/cloud.png</file>
+        <file>images/main/fog.png</file>
+        <file>images/main/fullmoon.png</file>
+        <file>images/main/max_cloud.png</file>
+        <file>images/main/medium_cloud.png</file>
+        <file>images/main/medium_ice.png</file>
+        <file>images/main/medium_rain.png</file>
+        <file>images/main/minimal_cloud.png</file>
+        <file>images/main/moon_cloud_medium.png</file>
+        <file>images/main/moon_cloud.png</file>
+        <file>images/main/much_snow.png</file>
+        <file>images/main/night_and_snow.png</file>
+        <file>images/main/night_flurry.png</file>
+        <file>images/main/night_fog.png</file>
+        <file>images/main/night_rain.png</file>
+        <file>images/main/night_thunder_rain.png</file>
+        <file>images/main/overcast.png</file>
+        <file>images/main/rain_and_snow.png</file>
+        <file>images/main/rain.png</file>
+        <file>images/main/snow.png</file>
+        <file>images/main/sun_and_rain.png</file>
+        <file>images/main/sun_and_snow.png</file>
+        <file>images/main/sun_flurrie.png</file>
+        <file>images/main/sun_maximum_clouds.png</file>
+        <file>images/main/sun_medium_ice.png</file>
+        <file>images/main/sun_medium_rain.png</file>
+        <file>images/main/sun_medium_snow.png</file>
+        <file>images/main/sun_minimal_clouds.png</file>
+        <file>images/main/sun_most_cloudy.png</file>
+        <file>images/main/sun_thunder_rain.png</file>
+        <file>images/main/sun.png</file>
     </qresource>
 </RCC>
