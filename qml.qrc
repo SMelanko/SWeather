@@ -71,5 +71,6 @@
         <file>images/main/sun_most_cloudy.png</file>
         <file>images/main/sun_thunder_rain.png</file>
         <file>images/main/sun.png</file>
+        <file>images/update.png</file>
     </qresource>
 </RCC>

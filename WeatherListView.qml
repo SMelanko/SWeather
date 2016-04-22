@@ -38,8 +38,12 @@ Rectangle {
 					smooth: true
 				}
 				Row {
-					Text { text: "Temperature, °C: "; font.pointSize: 16 }
 					Text { text: temperature; font.pointSize: 16 }
+					Text { text: "°"; font.pointSize: 16 }
+				}
+				Row {
+					Text { text: pressure; font.pointSize: 16 }
+					Text { text: " mmHg"; font.pointSize: 16 }
 				}
 			}
 
@@ -68,11 +72,16 @@ Rectangle {
 	{
 		var dt = new Date()
 		dt.setTime(Date.parse(data.dt_txt))
+		var hh = dt.getHours().toString()
+		if (hh.length == 1) {
+			hh = '0' + hh
+		}
 
 		_listModel.append({
-			time: dt.toTimeString(),
-			temperature: data.main.temp,
-			icon: "qrc:///images/list/moon@2x.png"
+			time: hh + ":00",
+			icon: "qrc:///images/list/sun@2x.png", // TODO
+			temperature: Math.round(data.main.temp),
+			pressure: parseInt(data.main.pressure * 0.75, 10)
 		})
 	}
 }

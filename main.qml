@@ -115,7 +115,7 @@ ApplicationWindow {
 		Text {
 			id: _title
 			anchors.centerIn: parent
-			color: "#5caa15"
+			color: "#357ec7"
 			font {
 				family: fontFamily
 				pointSize: fontSize * 2
@@ -149,16 +149,60 @@ ApplicationWindow {
 		}
 	}
 
-	Button {
-		id: _btn
-		x: 5; y: 5
-		width: 150; height: _banner.height - 10
-		text: qsTr("Update")
+	Rectangle {
+		id: _update
+		anchors.verticalCenter: _banner.verticalCenter
+		width: _banner.height * 0.7; height: _banner.height * 0.7
+		x: 5
+		color: "transparent"
+		border {
+			width: 1
+			color: "yellow"
+		}
 
-		onClicked: {
-			var request = makeRequestUrl(cityId, apiKey, units)
-			console.log(request)
-			getResponse(request)
+		Image {
+			width: parent.width; height: parent.height
+			anchors.centerIn: parent
+			source: "qrc:///images/update.png"
+		}
+
+		MouseArea {
+			anchors.fill: parent
+			onClicked: {
+				var request = makeRequestUrl(cityId, apiKey, units)
+				console.log(request)
+				getResponse(request)
+			}
+		}
+	}
+
+	ToolButton {
+		anchors {
+			right: _banner.right
+			rightMargin: 5
+			verticalCenter: _banner.verticalCenter
+		}
+		width: _banner.height * 0.7; height: _banner.height * 0.7
+		label: Image {
+			width: parent.width; height: parent.height
+			anchors.centerIn: parent
+			source: "qrc:///images/update.png"
+		}
+		onClicked: optionsMenu.open()
+
+		Menu {
+			id: optionsMenu
+			x: parent.width - width
+			transformOrigin: Menu.TopRight
+
+			MenuItem {
+				text: "Settings"
+				//onTriggered: settingsPopup.open()
+			}
+			MenuItem {
+				text: "About"
+				//onTriggered: aboutDialog.open()
+			}
 		}
 	}
 
