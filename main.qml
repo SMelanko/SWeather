@@ -8,7 +8,7 @@ import "HttpRequest.js" as HttpRequest
 
 ApplicationWindow {
 	id: _applicationWindow
-	width: 500; height: 550
+	width: 550; height: 700
 	title: qsTr("SWeather")
 	visible: true
 
