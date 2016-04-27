@@ -80,6 +80,14 @@ ApplicationWindow {
 		qml: orientation: landscape (2)
 		qml: primary orientation: landscape (2)
 		qml: Low DPI
+		// Nexus 5
+		qml: pixel density: 5.81 dots/mm (147.45 dots/inch)
+		qml: dimensions: 360x592
+		qml: logical pixel density: 2.83 dots/mm (72.00 dots/inch)
+		qml: device pixel ratio: 3.00
+		qml: available virtual desktop: 3240x5112
+		qml: orientation: portrait (1)
+		qml: primary orientation: portrait (1)
 		// Nexus 7 (1280 x 800)
 		qml: pixel density: 6.31 dots/mm (160.16 dots/inch)
 		qml: dimensions: 601x905
