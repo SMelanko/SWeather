@@ -2,11 +2,13 @@ import QtQuick 2.6
 
 Rectangle {
 	id: _rect
-	color: "#dcdcdc"
-	radius: 3
-	border {
-		width: 1
-		color: "green"
+	color: "transparent"
+
+	Rectangle {
+		anchors.fill: parent
+		color: "#d7d7d7"
+		opacity: 0.3
+		radius: 3
 	}
 
 	ListModel {
@@ -22,13 +24,19 @@ Rectangle {
 		model: _listModel
 
 		delegate: Item {
-			width: _rect.width; height: 64
+			id: _delegate
+			width: _rect.width; height: 60
 			Row {
+				id: _row
 				leftPadding: 10
 				spacing: 20
 				anchors.verticalCenter: parent.verticalCenter
+
 				Text {
-					font.pointSize: 20
+					height: _row.height
+					font {
+						pixelSize: _delegate.height / 2
+					}
 					text: time
 					verticalAlignment: Text.AlignVCenter
 				}
@@ -38,13 +46,35 @@ Rectangle {
 					smooth: true
 				}
 				Row {
-					Text { text: temperature; font.pointSize: 16 }
-					Text { text: "°"; font.pointSize: 16 }
+					Text {
+						height: _row.height
+						font {
+							pixelSize: _delegate.height / 2
+						}
+						text: temperature
+						verticalAlignment: Text.AlignVCenter
+					}
+					Text {
+						height: _row.height
+						font {
+							pixelSize: _delegate.height / 2
+						}
+						text: "°"
+						verticalAlignment: Text.AlignVCenter
+					}
 				}
 				Row {
 					Text { text: pressure; font.pointSize: 16 }
 					Text { text: " mmHg"; font.pointSize: 16 }
 				}
+			}
+			Rectangle {
+				anchors {
+					left: parent.left
+					bottom: parent.bottom
+				}
+				width: parent.width; height: 1
+				color: "#d7d7d7"
 			}
 
 			MouseArea {

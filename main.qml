@@ -1,5 +1,7 @@
 import QtQuick 2.5
 import QtQuick.Dialogs 1.2
+import QtQuick.Layouts 1.3
+import QtQuick.Controls.Styles 1.4
 import Qt.labs.controls 1.0
 import Qt.labs.controls.material 1.0
 import QtQuick.Window 2.2
@@ -38,11 +40,6 @@ ApplicationWindow {
 		console.log("device pixel ratio: " + Screen.devicePixelRatio.toFixed(2))
 		console.log("available virtual desktop: " +
 			Screen.desktopAvailableWidth + "x" + Screen.desktopAvailableHeight)
-		console.log("orientation: " + orientationToString(Screen.orientation) +
-			" (" + Screen.orientation + ")")
-		console.log("primary orientation: " +
-			orientationToString(Screen.primaryOrientation) +
-			" (" + Screen.primaryOrientation + ")")
 	}
 
 	function orientationToString(o) {
@@ -68,77 +65,114 @@ ApplicationWindow {
 		qml: logical pixel density: 3.78 dots/mm (96.00 dots/inch)
 		qml: device pixel ratio: 1.00
 		qml: available virtual desktop: 3200x1053
-		qml: orientation: landscape (2)
-		qml: primary orientation: landscape (2)
-		qml: Low DPI
 		// Mac
 		qml: pixel density: 4.47 dots/mm (113.50 dots/inch)
 		qml: dimensions: 1280x800
 		qml: logical pixel density: 2.83 dots/mm (72.00 dots/inch)
 		qml: device pixel ratio: 2.00
 		qml: available virtual desktop: 1280x730
-		qml: orientation: landscape (2)
-		qml: primary orientation: landscape (2)
-		qml: Low DPI
 		// Nexus 5
 		qml: pixel density: 5.81 dots/mm (147.45 dots/inch)
 		qml: dimensions: 360x592
 		qml: logical pixel density: 2.83 dots/mm (72.00 dots/inch)
 		qml: device pixel ratio: 3.00
-		qml: available virtual desktop: 3240x5112
-		qml: orientation: portrait (1)
-		qml: primary orientation: portrait (1)
 		// Nexus 7 (1280 x 800)
 		qml: pixel density: 6.31 dots/mm (160.16 dots/inch)
 		qml: dimensions: 601x905
 		qml: logical pixel density: 2.83 dots/mm (72.00 dots/inch)
 		qml: device pixel ratio: 1.33
-		qml: available virtual desktop: 1065x1560
-		qml: orientation: portrait (1)
-		qml: primary orientation: portrait (1)
-		qml: Low DPI
 		// iphone 6s simulator
 		qml: pixel density: 6.42 dots/mm (163.00 dots/inch)
 		qml: dimensions: 375x667
 		qml: logical pixel density: 2.83 dots/mm (72.00 dots/inch)
 		qml: device pixel ratio: 2.00
-		qml: available virtual desktop: 375x647
-		qml: orientation: portrait (1)
-		qml: primary orientation: portrait (1)
-		qml: Low DPI
 	*/
 
 	//
-	// Title.
+	// Background.
 	//
-	Rectangle {
-		id: _banner
+
+	Image {
+		width: parent.width; height: parent.height
+		source: "qrc:///images/background.jpg"
+	}
+
+	//
+	// Header.
+	//
+
+	header: Rectangle {
+		id: _header
 		width: parent.width; height: _title.height * 1.2
-		anchors.top: parent.top
 		gradient: Gradient {
-				GradientStop { position: 0.0; color: "black" }
-				GradientStop { position: 1.0; color: "#4c4c4c" }
+			GradientStop { position: 0.0; color: "#000" }
+			GradientStop { position: 1.0; color: "#4c4c4c" }
 		}
 
-		Text {
-			id: _title
-			anchors.centerIn: parent
-			color: "#357ec7"
-			font {
-				family: fontFamily
-				pointSize: fontSize * 2
+		RowLayout {
+			spacing: 20
+			anchors.fill: parent
+
+			ToolButton {
+				id: _update
+
+				label: Image {
+					width: _header.height * 0.75; height: _header.height * 0.75
+					anchors.centerIn: parent
+					source: "qrc:///images/update.png"
+				}
+
+				onClicked: {
+					var request = makeRequestUrl(cityId, apiKey, units)
+					console.log(request)
+					getResponse(request)
+				}
 			}
-			text: "SWeather"
+
+			Text {
+				id: _title
+				color: "#357ec7"
+				font {
+					pointSize: fontSize * 2
+				}
+				text: "SWeather"
+				horizontalAlignment: Qt.AlignHCenter
+				verticalAlignment: Qt.AlignVCenter
+				Layout.fillWidth: true
+			}
+
+			ToolButton {
+				label: Image {
+					anchors.centerIn: parent
+					source: "qrc:///images/menu.png"
+				}
+				onClicked: optionsMenu.open()
+
+				Menu {
+					id: optionsMenu
+					x: parent.width - width
+					transformOrigin: Menu.TopRight
+
+					MenuItem {
+						text: "Settings"
+						//onTriggered: settingsPopup.open()
+					}
+					MenuItem {
+						text: "About"
+						//onTriggered: aboutDialog.open()
+					}
+				}
+			}
 		}
 	}
 
 	CurrentWeatherWidget {
 		id: _currWeatherWgt
+		width: parent.width; height: parent.height * 0.52
 		anchors {
 			left: parent.left
-			top: _banner.bottom
+			top: _header.bottom
 			right: parent.right
-			bottom: parent.verticalCenter
 			margins: 5
 		}
 	}
@@ -147,70 +181,10 @@ ApplicationWindow {
 		id: _listView
 		anchors {
 			left: parent.left
-			leftMargin: 5
 			top: _currWeatherWgt.bottom
-			topMargin: 5
 			right: parent.right
-			rightMargin: 5
 			bottom: parent.bottom
-			bottomMargin: 5
-		}
-	}
-
-	Rectangle {
-		id: _update
-		anchors.verticalCenter: _banner.verticalCenter
-		width: _banner.height * 0.7; height: _banner.height * 0.7
-		x: 5
-		color: "transparent"
-		border {
-			width: 1
-			color: "yellow"
-		}
-
-		Image {
-			width: parent.width; height: parent.height
-			anchors.centerIn: parent
-			source: "qrc:///images/update.png"
-		}
-
-		MouseArea {
-			anchors.fill: parent
-			onClicked: {
-				var request = makeRequestUrl(cityId, apiKey, units)
-				console.log(request)
-				getResponse(request)
-			}
-		}
-	}
-
-	ToolButton {
-		anchors {
-			right: _banner.right
-			rightMargin: 5
-			verticalCenter: _banner.verticalCenter
-		}
-		width: _banner.height * 0.7; height: _banner.height * 0.7
-		label: Image {
-			width: parent.width; height: parent.height
-			anchors.centerIn: parent
-			source: "qrc:///images/update.png"
-		}
-		onClicked: optionsMenu.open()
-
-		Menu {
-			id: optionsMenu
-			x: parent.width - width
-			transformOrigin: Menu.TopRight
-
-			MenuItem {
-				text: "Settings"
-				//onTriggered: settingsPopup.open()
-			}
-			MenuItem {
-				text: "About"
-				//onTriggered: aboutDialog.open()
-			}
+			margins: 5
 		}
 	}
 
@@ -242,7 +216,7 @@ ApplicationWindow {
 	}
 
 	onResponseReceived: {
-		//console.log(response)
+		console.log(response)
 		var data = JSON.parse(response)
 		var location = data.city.name + ', ' + data.city.country
 

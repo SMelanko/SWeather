@@ -10,67 +10,75 @@
         <file>images/list/clouds@2x.png</file>
         <file>images/list/clouds@3x.png</file>
         <file>images/list/clouds@4x.png</file>
-        <file>images/list/little-rain.png</file>
-        <file>images/list/little-rain@2x.png</file>
-        <file>images/list/little-rain@3x.png</file>
-        <file>images/list/little-rain@4x.png</file>
         <file>images/list/moon.png</file>
         <file>images/list/moon@2x.png</file>
         <file>images/list/moon@3x.png</file>
         <file>images/list/moon@4x.png</file>
-        <file>images/list/partly-cloudy-day.png</file>
-        <file>images/list/partly-cloudy-day@2x.png</file>
-        <file>images/list/partly-cloudy-day@3x.png</file>
-        <file>images/list/partly-cloudy-day@4x.png</file>
-        <file>images/list/partly-cloudy-night.png</file>
-        <file>images/list/partly-cloudy-night@2x.png</file>
-        <file>images/list/partly-cloudy-night@3x.png</file>
-        <file>images/list/partly-cloudy-night@4x.png</file>
         <file>images/list/rain.png</file>
         <file>images/list/rain@2x.png</file>
         <file>images/list/rain@3x.png</file>
         <file>images/list/rain@4x.png</file>
-        <file>images/list/storm.png</file>
-        <file>images/list/storm@2x.png</file>
-        <file>images/list/storm@3x.png</file>
-        <file>images/list/storm@4x.png</file>
         <file>images/list/sun.png</file>
         <file>images/list/sun@2x.png</file>
         <file>images/list/sun@3x.png</file>
         <file>images/list/sun@4x.png</file>
-        <file>images/main/cloud_sun.png</file>
-        <file>images/main/cloud_thunder_rain.png</file>
-        <file>images/main/cloud.png</file>
-        <file>images/main/fog.png</file>
-        <file>images/main/fullmoon.png</file>
-        <file>images/main/max_cloud.png</file>
-        <file>images/main/medium_cloud.png</file>
-        <file>images/main/medium_ice.png</file>
-        <file>images/main/medium_rain.png</file>
-        <file>images/main/minimal_cloud.png</file>
-        <file>images/main/moon_cloud_medium.png</file>
-        <file>images/main/moon_cloud.png</file>
-        <file>images/main/much_snow.png</file>
-        <file>images/main/night_and_snow.png</file>
-        <file>images/main/night_flurry.png</file>
-        <file>images/main/night_fog.png</file>
-        <file>images/main/night_rain.png</file>
-        <file>images/main/night_thunder_rain.png</file>
-        <file>images/main/overcast.png</file>
-        <file>images/main/rain_and_snow.png</file>
+        <file>images/list/cloudy-day.png</file>
+        <file>images/list/cloudy-day@2x.png</file>
+        <file>images/list/cloudy-day@3x.png</file>
+        <file>images/list/cloudy-day@4x.png</file>
+        <file>images/list/cloudy-night.png</file>
+        <file>images/list/cloudy-night@2x.png</file>
+        <file>images/list/cloudy-night@3x.png</file>
+        <file>images/list/cloudy-night@4x.png</file>
+        <file>images/list/fog-day.png</file>
+        <file>images/list/fog-day@2x.png</file>
+        <file>images/list/fog-day@3x.png</file>
+        <file>images/list/fog-day@4x.png</file>
+        <file>images/list/fog-night.png</file>
+        <file>images/list/fog-night@2x.png</file>
+        <file>images/list/fog-night@3x.png</file>
+        <file>images/list/fog-night@4x.png</file>
+        <file>images/list/rain-little.png</file>
+        <file>images/list/rain-little@2x.png</file>
+        <file>images/list/rain-little@3x.png</file>
+        <file>images/list/rain-little@4x.png</file>
+        <file>images/list/rain-storm.png</file>
+        <file>images/list/rain-storm@2x.png</file>
+        <file>images/list/rain-storm@3x.png</file>
+        <file>images/list/rain-storm@4x.png</file>
+        <file>images/list/snow-little.png</file>
+        <file>images/list/snow-little@2x.png</file>
+        <file>images/list/snow-little@3x.png</file>
+        <file>images/list/snow-little@4x.png</file>
+        <file>images/list/snow-storm.png</file>
+        <file>images/list/snow-storm@2x.png</file>
+        <file>images/list/snow-storm@3x.png</file>
+        <file>images/list/snow-storm@4x.png</file>
+        <file>images/list/snow.png</file>
+        <file>images/list/snow@2x.png</file>
+        <file>images/list/snow@3x.png</file>
+        <file>images/list/snow@4x.png</file>
+        <file>images/main/clouds.png</file>
+        <file>images/main/cloudy-day.png</file>
+        <file>images/main/cloudy-night.png</file>
+        <file>images/main/fog-day.png</file>
+        <file>images/main/fog-night.png</file>
+        <file>images/main/moon.png</file>
+        <file>images/main/rain-little.png</file>
+        <file>images/main/rain-storm.png</file>
+        <file>images/main/snow-little.png</file>
+        <file>images/main/snow-storm.png</file>
         <file>images/main/rain.png</file>
         <file>images/main/snow.png</file>
-        <file>images/main/sun_and_rain.png</file>
-        <file>images/main/sun_and_snow.png</file>
-        <file>images/main/sun_flurrie.png</file>
-        <file>images/main/sun_maximum_clouds.png</file>
-        <file>images/main/sun_medium_ice.png</file>
-        <file>images/main/sun_medium_rain.png</file>
-        <file>images/main/sun_medium_snow.png</file>
-        <file>images/main/sun_minimal_clouds.png</file>
-        <file>images/main/sun_most_cloudy.png</file>
-        <file>images/main/sun_thunder_rain.png</file>
         <file>images/main/sun.png</file>
         <file>images/update.png</file>
+        <file>images/update@2x.png</file>
+        <file>images/update@3x.png</file>
+        <file>images/update@4x.png</file>
+        <file>images/menu.png</file>
+        <file>images/menu@2x.png</file>
+        <file>images/menu@3x.png</file>
+        <file>images/menu@4x.png</file>
+        <file>images/background.jpg</file>
     </qresource>
 </RCC>
