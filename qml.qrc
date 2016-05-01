@@ -1,51 +1,51 @@
 <RCC>
     <qresource prefix="/qml">
         <file>main.qml</file>
-        <file>HttpRequest.js</file>
+        <file>Utils.js</file>
         <file>WeatherListView.qml</file>
         <file>CurrentWeatherWidget.qml</file>
     </qresource>
     <qresource prefix="/">
-        <file>images/list/clouds.png</file>
-        <file>images/list/clouds@2x.png</file>
-        <file>images/list/clouds@3x.png</file>
-        <file>images/list/clouds@4x.png</file>
-        <file>images/list/moon.png</file>
-        <file>images/list/moon@2x.png</file>
-        <file>images/list/moon@3x.png</file>
-        <file>images/list/moon@4x.png</file>
-        <file>images/list/rain.png</file>
-        <file>images/list/rain@2x.png</file>
-        <file>images/list/rain@3x.png</file>
-        <file>images/list/rain@4x.png</file>
-        <file>images/list/sun.png</file>
-        <file>images/list/sun@2x.png</file>
-        <file>images/list/sun@3x.png</file>
-        <file>images/list/sun@4x.png</file>
-        <file>images/list/cloudy-day.png</file>
-        <file>images/list/cloudy-day@2x.png</file>
-        <file>images/list/cloudy-day@3x.png</file>
-        <file>images/list/cloudy-day@4x.png</file>
-        <file>images/list/cloudy-night.png</file>
-        <file>images/list/cloudy-night@2x.png</file>
-        <file>images/list/cloudy-night@3x.png</file>
-        <file>images/list/cloudy-night@4x.png</file>
-        <file>images/list/fog-day.png</file>
-        <file>images/list/fog-day@2x.png</file>
-        <file>images/list/fog-day@3x.png</file>
-        <file>images/list/fog-day@4x.png</file>
-        <file>images/list/fog-night.png</file>
-        <file>images/list/fog-night@2x.png</file>
-        <file>images/list/fog-night@3x.png</file>
-        <file>images/list/fog-night@4x.png</file>
-        <file>images/list/rain-little.png</file>
-        <file>images/list/rain-little@2x.png</file>
-        <file>images/list/rain-little@3x.png</file>
-        <file>images/list/rain-little@4x.png</file>
-        <file>images/list/rain-storm.png</file>
-        <file>images/list/rain-storm@2x.png</file>
-        <file>images/list/rain-storm@3x.png</file>
-        <file>images/list/rain-storm@4x.png</file>
+        <file>images/list/03d.png</file>
+        <file>images/list/03d@2x.png</file>
+        <file>images/list/03d@3x.png</file>
+        <file>images/list/03d@4x.png</file>
+        <file>images/list/01n.png</file>
+        <file>images/list/01n@2x.png</file>
+        <file>images/list/01n@3x.png</file>
+        <file>images/list/01n@4x.png</file>
+        <file>images/list/09d.png</file>
+        <file>images/list/09d@2x.png</file>
+        <file>images/list/09d@3x.png</file>
+        <file>images/list/09d@4x.png</file>
+        <file>images/list/01d.png</file>
+        <file>images/list/01d@2x.png</file>
+        <file>images/list/01d@3x.png</file>
+        <file>images/list/01d@4x.png</file>
+        <file>images/list/02d.png</file>
+        <file>images/list/02d@2x.png</file>
+        <file>images/list/02d@3x.png</file>
+        <file>images/list/02d@4x.png</file>
+        <file>images/list/02n.png</file>
+        <file>images/list/02n@2x.png</file>
+        <file>images/list/02n@3x.png</file>
+        <file>images/list/02n@4x.png</file>
+        <file>images/list/50d.png</file>
+        <file>images/list/50d@2x.png</file>
+        <file>images/list/50d@3x.png</file>
+        <file>images/list/50d@4x.png</file>
+        <file>images/list/50n.png</file>
+        <file>images/list/50n@2x.png</file>
+        <file>images/list/50n@3x.png</file>
+        <file>images/list/50n@4x.png</file>
+        <file>images/list/10d.png</file>
+        <file>images/list/10d@2x.png</file>
+        <file>images/list/10d@3x.png</file>
+        <file>images/list/10d@4x.png</file>
+        <file>images/list/11d.png</file>
+        <file>images/list/11d@2x.png</file>
+        <file>images/list/11d@3x.png</file>
+        <file>images/list/11d@4x.png</file>
         <file>images/list/snow-little.png</file>
         <file>images/list/snow-little@2x.png</file>
         <file>images/list/snow-little@3x.png</file>
@@ -54,23 +54,40 @@
         <file>images/list/snow-storm@2x.png</file>
         <file>images/list/snow-storm@3x.png</file>
         <file>images/list/snow-storm@4x.png</file>
-        <file>images/list/snow.png</file>
-        <file>images/list/snow@2x.png</file>
-        <file>images/list/snow@3x.png</file>
-        <file>images/list/snow@4x.png</file>
-        <file>images/main/clouds.png</file>
-        <file>images/main/cloudy-day.png</file>
-        <file>images/main/cloudy-night.png</file>
-        <file>images/main/fog-day.png</file>
-        <file>images/main/fog-night.png</file>
-        <file>images/main/moon.png</file>
-        <file>images/main/rain-little.png</file>
-        <file>images/main/rain-storm.png</file>
+        <file>images/list/13d.png</file>
+        <file>images/list/13d@2x.png</file>
+        <file>images/list/13d@3x.png</file>
+        <file>images/list/13d@4x.png</file>
+        <file>images/main/03d.png</file>
+        <file>images/main/02d.png</file>
+        <file>images/main/02n.png</file>
+        <file>images/main/50d.png</file>
+        <file>images/main/50n.png</file>
+        <file>images/main/01n.png</file>
+        <file>images/main/10d.png</file>
+        <file>images/main/11d.png</file>
         <file>images/main/snow-little.png</file>
         <file>images/main/snow-storm.png</file>
-        <file>images/main/rain.png</file>
-        <file>images/main/snow.png</file>
-        <file>images/main/sun.png</file>
+        <file>images/main/09d.png</file>
+        <file>images/main/13d.png</file>
+        <file>images/main/01d.png</file>
+        <file>images/background.jpg</file>
+        <file>images/pressure.png</file>
+        <file>images/pressure@2x.png</file>
+        <file>images/pressure@3x.png</file>
+        <file>images/pressure@4x.png</file>
+        <file>images/humidity.png</file>
+        <file>images/humidity@2x.png</file>
+        <file>images/humidity@3x.png</file>
+        <file>images/humidity@4x.png</file>
+        <file>images/wind.png</file>
+        <file>images/wind@2x.png</file>
+        <file>images/wind@3x.png</file>
+        <file>images/wind@4x.png</file>
+        <file>images/wind-direction.png</file>
+        <file>images/wind-direction@2x.png</file>
+        <file>images/wind-direction@3x.png</file>
+        <file>images/wind-direction@4x.png</file>
         <file>images/update.png</file>
         <file>images/update@2x.png</file>
         <file>images/update@3x.png</file>
@@ -79,6 +96,5 @@
         <file>images/menu@2x.png</file>
         <file>images/menu@3x.png</file>
         <file>images/menu@4x.png</file>
-        <file>images/background.jpg</file>
     </qresource>
 </RCC>

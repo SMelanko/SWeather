@@ -2,6 +2,8 @@ import QtQuick 2.6
 import Qt.labs.controls 1.0
 import Qt.labs.controls.material 1.0
 
+import "Utils.js" as Utils
+
 Rectangle {
 	id: _currWeatherWgt
 	color: "transparent"
@@ -76,78 +78,133 @@ Rectangle {
 				top: _location.bottom
 				horizontalCenter: parent.horizontalCenter
 			}
+			color: "#c77e35"
 			font {
-				family: fontFamily
-				pixelSize: _currWeatherWgt.height * 0.25
+				pixelSize: _currWeatherWgt.height * 0.35
 			}
 		}
 
 		//
-		// Pressure.
+		// Description.
 		//
 
 		Text {
-			id: _pressure
-			anchors.top: _temperature.bottom
-			font {
-				pointSize: fontSize
-			}
-			text: qsTr("Pressure") +", " + qsTr("mmHg") + ": "
-		}
-		Text {
-			id: _pressureVal
+			id: _description
 			anchors {
 				top: _temperature.bottom
-				left: _pressure.right
+				horizontalCenter: parent.horizontalCenter
 			}
 			font {
-				pointSize: fontSize
+				pixelSize: _currWeatherWgt.height * 0.05
 			}
 		}
 
-		//
-		// Humidity.
-		//
-
-		Text {
-			id: _humidity
-			anchors.top: _pressure.bottom
-			font {
-				pointSize: fontSize
-			}
-			text: qsTr("Humidity") +", " + "%" + ": "
-		}
-		Text {
-			id: _humidityVal
+		Column {
+			id: _column
 			anchors {
-				top: _pressure.bottom
-				left: _humidity.right
+				top: _description.bottom
+				topMargin: _currWeatherWgt.height * 0.05
+				horizontalCenter: parent.horizontalCenter
 			}
-			font {
-				pointSize: fontSize
-			}
-		}
+			spacing: 10
 
-		//
-		// Windy.
-		//
+			//
+			// Wind.
+			//
 
-		Text {
-			id: _windy
-			anchors.top: _humidity.bottom
-			font {
-				pointSize: fontSize
+			Row {
+				id: _windRow
+				spacing: 10
+
+				Image {
+					smooth: true
+					source: "qrc:///images/wind.png"
+				}
+
+				Text {
+					id: _windVal
+					font {
+						pointSize:  _currWeatherWgt.height * 0.05
+					}
+				}
+
+				Text {
+					font {
+						pixelSize: _currWeatherWgt.height * 0.05
+					}
+					text: qsTr("m/s")
+				}
+
+				Image {
+					id: _windDirection
+					smooth: true
+					source: "qrc:///images/wind-direction.png"
+					transform: Rotation {
+						id: _rotation
+						origin {
+							x: _windDirection.width / 2;
+							y: _windDirection.width / 2;
+						}
+					}
+				}
 			}
-			text: qsTr("Wind") +", " + qsTr("m/s") + ": "
-		}
-		Text {
-			id: _windyVal
-			anchors {
-				top: _humidity.bottom
-				left: _windy.right
+
+			//
+			// Humidity.
+			//
+
+			Row {
+				id: _humidityRow
+				spacing: 10
+
+				Image {
+					smooth: true
+					source: "qrc:///images/humidity.png"
+				}
+
+				Text {
+					id: _humidityVal
+					font {
+						pixelSize: _currWeatherWgt.height * 0.05
+					}
+				}
+
+				Text {
+					id: _humidity
+					font {
+						pixelSize: _currWeatherWgt.height * 0.05
+					}
+					text: "%"
+				}
 			}
-			font {
-				pointSize: fontSize
+
+			//
+			// Pressure.
+			//
+
+			Row {
+				id: _pressureRow
+				spacing: 10
+
+				Image {
+					smooth: true
+					source: "qrc:///images/pressure.png"
+				}
+
+				Text {
+					id: _pressureVal
+					font {
+						pixelSize: _currWeatherWgt.height * 0.05
+					}
+				}
+
+				Text {
+					id: _pressure
+					font {
+						pixelSize: _currWeatherWgt.height * 0.05
+					}
+					text: qsTr("mmHg")
+				}
 			}
 		}
 	}
@@ -162,10 +219,14 @@ Rectangle {
 	{
 		_location.text = location
 		_temperature.text = Math.round(data.main.temp) + '°'
+		_description.text = Utils.convertFirstCharToUpperCase(
+			data.weather[0].description)
 		var pressureVal = data.main.pressure * 0.75
 		_pressureVal.text = parseInt(pressureVal, 10)
 		_humidityVal.text = data.main.humidity
-		_windyVal.text = data.wind.speed
-		_img.source = 'qrc:///images/main/sun.png'
+		_windVal.text = data.wind.speed
+		_rotation.angle = data.wind.deg
+		_img.source = 'qrc:///images/main/' +
+			Utils.getWeatherIcon(data.weather[0].icon) + '.png'
 	}
 }

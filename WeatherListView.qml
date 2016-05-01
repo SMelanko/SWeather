@@ -1,5 +1,7 @@
 import QtQuick 2.6
 
+import "Utils.js" as Utils
+
 Rectangle {
 	id: _rect
 	color: "transparent"
@@ -109,7 +111,8 @@ Rectangle {
 
 		_listModel.append({
 			time: hh + ":00",
-			icon: "qrc:///images/list/sun@2x.png", // TODO
+			icon: "qrc:///images/list/" +
+				Utils.getWeatherIcon(data.weather[0].icon) + ".png",
 			temperature: Math.round(data.main.temp),
 			pressure: parseInt(data.main.pressure * 0.75, 10)
 		})

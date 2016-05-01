@@ -6,7 +6,7 @@ import Qt.labs.controls 1.0
 import Qt.labs.controls.material 1.0
 import QtQuick.Window 2.2
 
-import "HttpRequest.js" as HttpRequest
+import "Utils.js" as Utils
 
 ApplicationWindow {
 	id: _applicationWindow
@@ -114,12 +114,10 @@ ApplicationWindow {
 			anchors.fill: parent
 
 			ToolButton {
-				id: _update
-
 				label: Image {
-					width: _header.height * 0.75; height: _header.height * 0.75
 					anchors.centerIn: parent
-					source: "qrc:///images/update.png"
+					source: "qrc:///images/update@3x.png"
+					smooth: true
 				}
 
 				onClicked: {
@@ -145,6 +143,7 @@ ApplicationWindow {
 				label: Image {
 					anchors.centerIn: parent
 					source: "qrc:///images/menu.png"
+					smooth: true
 				}
 				onClicked: optionsMenu.open()
 
@@ -224,16 +223,6 @@ ApplicationWindow {
 
 		for (var j = 1; j < 9; ++j) {
 			_listView.addRow(data.list[j])
-			/*
-			console.log(data.list[j].dt_txt)
-			console.log("       Main: " + data.list[j].weather[0].main)
-			console.log("Description: " + data.list[j].weather[0].description)
-			console.log("       Icon: " + data.list[j].weather[0].icon)
-			console.log("     Clouds: " + data.list[j].clouds.all)
-			console.log("Temperature: " + data.list[j].main.temp)
-			console.log("   Pressure: " + data.list[j].main.pressure)
-			console.log("       Wind: " + data.list[j].wind.speed)
-			*/
 		}
 	}
 
