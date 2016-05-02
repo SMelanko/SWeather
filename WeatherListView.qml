@@ -3,9 +3,10 @@ import QtQuick 2.6
 import "Utils.js" as Utils
 
 Rectangle {
-	id: _rect
+	id: _listViewRect
 	color: "transparent"
 
+	// Set background.
 	Rectangle {
 		anchors.fill: parent
 		color: "#d7d7d7"
@@ -18,7 +19,7 @@ Rectangle {
 	}
 
 	ListView {
-		id: _list
+		id: _listView
 		anchors.fill: parent
 		clip: true
 		focus: true
@@ -27,37 +28,39 @@ Rectangle {
 
 		delegate: Item {
 			id: _delegate
-			width: _rect.width; height: 60
+			width: _listViewRect.width; height: _listViewRect.height / 5
 			Row {
-				id: _row
+				id: _delegateRow
+				anchors.verticalCenter: parent.verticalCenter
 				leftPadding: 10
 				spacing: 20
-				anchors.verticalCenter: parent.verticalCenter
 
 				Text {
-					height: _row.height
+					height: _delegateRow.height
 					font {
 						pixelSize: _delegate.height / 2
 					}
 					text: time
 					verticalAlignment: Text.AlignVCenter
 				}
+
 				Image {
-					width: 32; height: 32
+					fillMode: Image.PreserveAspectFit
 					source: icon
-					smooth: true
 				}
+
 				Row {
 					Text {
-						height: _row.height
+						height: _delegateRow.height
 						font {
 							pixelSize: _delegate.height / 2
 						}
 						text: temperature
 						verticalAlignment: Text.AlignVCenter
 					}
+
 					Text {
-						height: _row.height
+						height: _delegateRow.height
 						font {
 							pixelSize: _delegate.height / 2
 						}
@@ -66,10 +69,28 @@ Rectangle {
 					}
 				}
 				Row {
-					Text { text: pressure; font.pointSize: 16 }
-					Text { text: " mmHg"; font.pointSize: 16 }
+					spacing: 2
+
+					Text {
+						height: _delegateRow.height
+						font {
+							pixelSize: _delegate.height / 2
+						}
+						text: windVelocity
+						verticalAlignment: Text.AlignVCenter
+					}
+
+					Text {
+						height: _delegateRow.height
+						font {
+							pixelSize: _delegate.height / 2
+						}
+						text: qsTr("m/s")
+						verticalAlignment: Text.AlignVCenter
+					}
 				}
 			}
+
 			Rectangle {
 				anchors {
 					left: parent.left
@@ -78,19 +99,19 @@ Rectangle {
 				width: parent.width; height: 1
 				color: "#d7d7d7"
 			}
-
-			MouseArea {
-				anchors.fill: parent;
-				onClicked: {
-					_list.currentIndex = index
-				}
-			}
 		}
 
 		add: Transition {
-			NumberAnimation { properties: "y"; from: height; duration: 500 }
-			NumberAnimation { property: "opacity"; from: 0; to: 1.0; duration: 500 }
-			//NumberAnimation { property: "scale"; from: 0; to: 1.0; duration: 500 }
+			NumberAnimation {
+				properties: "y"
+				from: height
+				duration: 500
+			}
+			NumberAnimation {
+				property: "opacity"
+				from: 0; to: 1.0
+				duration: 500
+			}
 		}
 	}
 
@@ -110,11 +131,11 @@ Rectangle {
 		}
 
 		_listModel.append({
-			time: hh + ":00",
-			icon: "qrc:///images/list/" +
-				Utils.getWeatherIcon(data.weather[0].icon) + ".png",
+			time: hh + ':00',
+			icon: 'qrc:///images/list/' +
+				Utils.getWeatherIcon(data.weather[0].icon) + '.png',
 			temperature: Math.round(data.main.temp),
-			pressure: parseInt(data.main.pressure * 0.75, 10)
+			windVelocity: data.wind.speed
 		})
 	}
 }

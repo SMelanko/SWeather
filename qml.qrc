@@ -1,6 +1,6 @@
 <RCC>
     <qresource prefix="/qml">
-        <file>main.qml</file>
+        <file>Main.qml</file>
         <file>Utils.js</file>
         <file>WeatherListView.qml</file>
         <file>CurrentWeatherWidget.qml</file>

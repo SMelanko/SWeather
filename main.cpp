@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
 	qputenv("QT_LABS_CONTROLS_STYLE", "Material");
 
 	QQmlApplicationEngine engine;
-	engine.load(QUrl(QStringLiteral("qrc:/qml/main.qml")));
+	engine.load(QUrl(QStringLiteral("qrc:/qml/Main.qml")));
 	if (engine.rootObjects().isEmpty()) {
 		return -1;
 	}

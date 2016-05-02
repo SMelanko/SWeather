@@ -20,8 +20,6 @@ ApplicationWindow {
 	property string apiKey: '6f75ff20ca01b304bb986d7019d05adc'
 	property string cityId: '706483' // Kharkiv, Ukraine.
 	property string units: 'metric'
-	property string fontFamily: "Open Sans"
-	property int fontSize: 18
 
 	//
 	// Signals interface.
@@ -30,6 +28,8 @@ ApplicationWindow {
 	signal responseReceived(string response)
 
 	Component.onCompleted: {
+		httpRequest()
+
 		console.log("pixel density: " +
 			Screen.pixelDensity.toFixed(2) + " dots/mm (" +
 			(Screen.pixelDensity * 25.4).toFixed(2) + " dots/inch)")
@@ -40,22 +40,6 @@ ApplicationWindow {
 		console.log("device pixel ratio: " + Screen.devicePixelRatio.toFixed(2))
 		console.log("available virtual desktop: " +
 			Screen.desktopAvailableWidth + "x" + Screen.desktopAvailableHeight)
-	}
-
-	function orientationToString(o) {
-		switch (o) {
-		case Qt.PrimaryOrientation:
-			return "primary";
-		case Qt.PortraitOrientation:
-			return "portrait";
-		case Qt.LandscapeOrientation:
-			return "landscape";
-		case Qt.InvertedPortraitOrientation:
-			return "inverted portrait";
-		case Qt.InvertedLandscapeOrientation:
-			return "inverted landscape";
-		}
-		return "unknown";
 	}
 
 	/*
@@ -117,13 +101,10 @@ ApplicationWindow {
 				label: Image {
 					anchors.centerIn: parent
 					source: "qrc:///images/update@3x.png"
-					smooth: true
 				}
 
 				onClicked: {
-					var request = makeRequestUrl(cityId, apiKey, units)
-					console.log(request)
-					getResponse(request)
+					httpRequest()
 				}
 			}
 
@@ -131,7 +112,7 @@ ApplicationWindow {
 				id: _title
 				color: "#357ec7"
 				font {
-					pointSize: fontSize * 2
+					pointSize: 36
 				}
 				text: "SWeather"
 				horizontalAlignment: Qt.AlignHCenter
@@ -143,7 +124,6 @@ ApplicationWindow {
 				label: Image {
 					anchors.centerIn: parent
 					source: "qrc:///images/menu.png"
-					smooth: true
 				}
 				onClicked: optionsMenu.open()
 
@@ -215,7 +195,6 @@ ApplicationWindow {
 	}
 
 	onResponseReceived: {
-		console.log(response)
 		var data = JSON.parse(response)
 		var location = data.city.name + ', ' + data.city.country
 
@@ -245,6 +224,12 @@ ApplicationWindow {
 			}
 		}
 		xhr.send(null)
+	}
+
+	function httpRequest() {
+		var request = makeRequestUrl(cityId, apiKey, units)
+		//console.log(request)
+		getResponse(request)
 	}
 
 	//! Makes a request url.
