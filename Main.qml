@@ -100,7 +100,7 @@ ApplicationWindow {
 			ToolButton {
 				label: Image {
 					anchors.centerIn: parent
-					source: "qrc:///images/update@3x.png"
+					source: "qrc:///images/update.png"
 				}
 
 				onClicked: {
@@ -154,6 +154,15 @@ ApplicationWindow {
 			right: parent.right
 			margins: 5
 		}
+		visible: false
+	}
+
+	BusyIndicator {
+		id: _busiIndicator
+		readonly property int size: Math.min(_applicationWindow.width, _applicationWindow.height) / 5
+		width: size; height: size
+		anchors.centerIn: parent
+		visible: true
 	}
 
 	WeatherListView {
@@ -165,6 +174,7 @@ ApplicationWindow {
 			bottom: parent.bottom
 			margins: 5
 		}
+		visible: false
 	}
 
 	MessageDialog {
@@ -185,6 +195,8 @@ ApplicationWindow {
 	//
 
 	onResponseFailed: {
+		_busiIndicator.visible = false
+
 		if (status == 0) {
 			_msgBox.informativeText = "No internet connection"
 		} else {
@@ -198,6 +210,10 @@ ApplicationWindow {
 		//console.log(response)
 		var data = JSON.parse(response)
 		var location = data.city.name + ', ' + data.city.country
+
+		_busiIndicator.visible = false
+		_currWeatherWgt.visible = true
+		_listView.visible = true
 
 		_currWeatherWgt.setCurrWeatherParams(location, data.list[0])
 

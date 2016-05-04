@@ -50,7 +50,7 @@ Rectangle {
 						pixelSize: _delegate.height / 3
 					}
 					text: date
-					verticalAlignment: Text.AlignTop
+					verticalAlignment: Text.AlignVCenter
 				}
 
 				Image {
