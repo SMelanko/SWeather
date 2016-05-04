@@ -8,10 +8,11 @@ int main(int argc, char *argv[])
 	QGuiApplication::setOrganizationName("Slava Melanko");
 	QGuiApplication::setApplicationVersion("1.0.0");
 	QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+	QGuiApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
 
 	QGuiApplication app(argc, argv);
 
-	qputenv("QT_AUTO_SCREEN_SCALE_FACTOR", "true");
+	//qputenv("QT_AUTO_SCREEN_SCALE_FACTOR", "true");
 	qputenv("QT_LABS_CONTROLS_STYLE", "Material");
 
 	QQmlApplicationEngine engine;
