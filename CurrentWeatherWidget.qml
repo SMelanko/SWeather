@@ -68,7 +68,7 @@ Rectangle {
 				horizontalCenter: parent.horizontalCenter
 			}
 			font {
-				pixelSize: _currWeatherWgt.height * 0.05
+				pixelSize: _currWeatherWgt.height * 0.075
 			}
 		}
 

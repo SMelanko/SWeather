@@ -33,7 +33,7 @@ Rectangle {
 				id: _delegateRow
 				anchors.verticalCenter: parent.verticalCenter
 				leftPadding: 10
-				spacing: 20
+				spacing: 25
 
 				Text {
 					height: _delegateRow.height
@@ -42,6 +42,15 @@ Rectangle {
 					}
 					text: time
 					verticalAlignment: Text.AlignVCenter
+				}
+
+				Text {
+					height: _delegateRow.height
+					font {
+						pixelSize: _delegate.height / 3
+					}
+					text: date
+					verticalAlignment: Text.AlignTop
 				}
 
 				Image {
@@ -65,27 +74,6 @@ Rectangle {
 							pixelSize: _delegate.height / 2
 						}
 						text: "°"
-						verticalAlignment: Text.AlignVCenter
-					}
-				}
-				Row {
-					spacing: 2
-
-					Text {
-						height: _delegateRow.height
-						font {
-							pixelSize: _delegate.height / 2
-						}
-						text: windVelocity
-						verticalAlignment: Text.AlignVCenter
-					}
-
-					Text {
-						height: _delegateRow.height
-						font {
-							pixelSize: _delegate.height / 2
-						}
-						text: qsTr("m/s")
 						verticalAlignment: Text.AlignVCenter
 					}
 				}
@@ -132,10 +120,10 @@ Rectangle {
 
 		_listModel.append({
 			time: hh + ':00',
+			date: dt.getDay() + ', ' + Utils.getMonthNameFromDate(dt),
 			icon: 'qrc:///images/list/' +
 				Utils.getWeatherIcon(data.weather[0].icon) + '.png',
-			temperature: Math.round(data.main.temp),
-			windVelocity: data.wind.speed
+			temperature: Math.round(data.main.temp)
 		})
 	}
 }

@@ -8,6 +8,15 @@ function convertFirstCharToUpperCase(str) {
 	return str.toUpperCase().charAt(0) + str.substring(1);
 }
 
+//! Returns month name from date.
+// @1 - date object.
+function getMonthNameFromDate(date) {
+	var monthNames = ["Jan", "Feb", "Mar", "Apr", "May",
+		"Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+	return monthNames[date.getMonth()];
+}
+
 //! Return icon id.
 // @1 - code of the icon.
 function getWeatherIcon(code) {

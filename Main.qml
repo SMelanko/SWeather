@@ -87,7 +87,7 @@ ApplicationWindow {
 
 	header: Rectangle {
 		id: _header
-		width: parent.width; height: _title.height * 1.2
+		width: _applicationWindow.width; height: _title.height * 1.2
 		gradient: Gradient {
 			GradientStop { position: 0.0; color: "#000" }
 			GradientStop { position: 1.0; color: "#4c4c4c" }
