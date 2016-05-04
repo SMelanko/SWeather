@@ -120,7 +120,7 @@ Rectangle {
 
 		_listModel.append({
 			time: hh + ':00',
-			date: dt.getDay() + ', ' + Utils.getMonthNameFromDate(dt),
+			date: dt.getDate() + ', ' + Utils.getMonthNameFromDate(dt),
 			icon: 'qrc:///images/list/' +
 				Utils.getWeatherIcon(data.weather[0].icon) + '.png',
 			temperature: Math.round(data.main.temp)

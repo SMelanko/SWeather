@@ -195,6 +195,7 @@ ApplicationWindow {
 	}
 
 	onResponseReceived: {
+		//console.log(response)
 		var data = JSON.parse(response)
 		var location = data.city.name + ', ' + data.city.country
 
