@@ -134,7 +134,7 @@ ApplicationWindow {
 
 					MenuItem {
 						text: "Settings"
-						//onTriggered: settingsPopup.open()
+						onTriggered: settingsPopup.open()
 					}
 					MenuItem {
 						text: "About"
@@ -188,6 +188,10 @@ ApplicationWindow {
 		onAccepted: {
 			Qt.quit()
 		}
+	}
+
+	SettingsPopup {
+		id: settingsPopup
 	}
 
 	//
