@@ -4,7 +4,7 @@ import Qt.labs.controls 1.0
 import Qt.labs.controls.material 1.0
 
 Popup {
-	id: settingsPopup
+	id: _settingsPopup
 	width: Math.min(_applicationWindow.width, _applicationWindow.height) / 3 * 2.5
 	height: _settingsColumn.implicitHeight + topPadding + bottomPadding
 	x: (_applicationWindow.width - width) / 2
@@ -63,7 +63,7 @@ Popup {
 				id: _okButton
 				text: "Ok"
 				onClicked: {
-					settingsPopup.close()
+					_settingsPopup.close()
 				}
 				Layout.fillWidth: true
 			}
@@ -72,7 +72,7 @@ Popup {
 				id: _cancelButton
 				text: "Cancel"
 				onClicked: {
-					settingsPopup.close()
+					_settingsPopup.close()
 				}
 				Layout.fillWidth: true
 			}

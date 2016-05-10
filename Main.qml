@@ -134,11 +134,11 @@ ApplicationWindow {
 
 					MenuItem {
 						text: "Settings"
-						onTriggered: settingsPopup.open()
+						onTriggered: _settingsPopup.open()
 					}
 					MenuItem {
 						text: "About"
-						//onTriggered: aboutDialog.open()
+						onTriggered: _aboutPopup.open()
 					}
 				}
 			}
@@ -190,8 +190,12 @@ ApplicationWindow {
 		}
 	}
 
+	AboutPopup {
+		id: _aboutPopup
+	}
+
 	SettingsPopup {
-		id: settingsPopup
+		id: _settingsPopup
 	}
 
 	//

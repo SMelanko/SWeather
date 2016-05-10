@@ -5,6 +5,7 @@
         <file>WeatherListView.qml</file>
         <file>CurrentWeatherWidget.qml</file>
         <file>SettingsPopup.qml</file>
+        <file>AboutPopup.qml</file>
     </qresource>
     <qresource prefix="/">
         <file>images/list/03d.png</file>
