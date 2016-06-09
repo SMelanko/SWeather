@@ -14,16 +14,10 @@ ApplicationWindow {
 	title: qsTr("SWeather")
 	visible: true
 
-	//
-	// Property interface.
-	//
 	property string apiKey: '6f75ff20ca01b304bb986d7019d05adc'
 	property string cityId: '706483' // Kharkiv, Ukraine.
 	property string units: 'metric'
 
-	//
-	// Signals interface.
-	//
 	signal responseFailed(int status, string msg)
 	signal responseReceived(string response)
 
@@ -72,19 +66,6 @@ ApplicationWindow {
 		qml: device pixel ratio: 2.00
 	*/
 
-	//
-	// Background.
-	//
-
-	Image {
-		width: parent.width; height: parent.height
-		source: "qrc:///images/background.jpg"
-	}
-
-	//
-	// Header.
-	//
-
 	header: Rectangle {
 		id: _header
 		width: _applicationWindow.width; height: _title.height * 1.2
@@ -125,10 +106,10 @@ ApplicationWindow {
 					anchors.centerIn: parent
 					source: "qrc:///images/menu.png"
 				}
-				onClicked: optionsMenu.open()
+				onClicked: _optionsMenu.open()
 
 				Menu {
-					id: optionsMenu
+					id: _optionsMenu
 					x: parent.width - width
 					transformOrigin: Menu.TopRight
 
@@ -147,7 +128,7 @@ ApplicationWindow {
 
 	CurrentWeatherWidget {
 		id: _currWeatherWgt
-		width: parent.width; height: parent.height * 0.52
+		width: parent.width; height: parent.height * 0.5
 		anchors {
 			left: parent.left
 			top: _header.bottom
