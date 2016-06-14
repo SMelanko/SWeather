@@ -35,32 +35,32 @@ Rectangle {
 			}
 		}
 	}
-/*
-	// Main params.
+
 	RowLayout {
-		id: _mainParamsRowLayout
+		id: _mainRowLayout
 		anchors {
 			left: parent.left
 			top: _locationRowLayout.bottom
 			right: parent.right
+			bottom: _paramsRowLayout.top
 		}
-		height: parent.height * 0.75
 
-		// Left.
 		ColumnLayout {
 			id: _leftParamsColLayout
 			anchors {
 				left: parent.left
-				top: _locationRowLayout.bottom
-				right: parent.horizontalCenter
+				top: parent.top
+				right: _mainRowLayout.horizontalCenter
+				bottom: parent.bottom
 			}
+			spacing: 2
 
 			// Temperature.
 			Text {
 				id: _temperatureTxt
 				color: "#c77e35"
 				font {
-					pixelSize: _leftParamsColLayout.height * 0.7
+					pixelSize: _leftParamsColLayout.height * 0.6
 				}
 			}
 
@@ -73,21 +73,22 @@ Rectangle {
 			}
 		}
 
-		// Right. Main weather image.
 		Image {
 			id: _weatherMainImg
-			//width: _weatherImgRect.width * 0.75
-			//height: _weatherImgRect.height * 0.75
-			//anchors.centerIn: parent
+			anchors {
+				left: _leftParamsColLayout.right
+				top: parent.top
+				right: parent.right
+				bottom: parent.bottom
+			}
 			fillMode: Image.PreserveAspectFit
 		}
 	}
-*/
+
 	RowLayout {
 		id: _paramsRowLayout
 		anchors {
 			left: parent.left
-			//top: _locationRowLayout.bottom
 			right: parent.right
 			bottom: parent.bottom
 			margins: 5
@@ -101,7 +102,7 @@ Rectangle {
 		// Wind.
 		Row {
 			id: _windRow
-			Layout.fillWidth: true
+			anchors.left: parent.left
 			spacing: parent.spacingVal
 
 			Image {
@@ -142,7 +143,7 @@ Rectangle {
 		// Humidity.
 		Row {
 			id: _humidityRow
-			Layout.fillWidth: true
+			anchors.centerIn: parent
 			spacing: parent.spacingVal
 
 			Image {
@@ -170,7 +171,7 @@ Rectangle {
 		// Pressure.
 		Row {
 			id: _pressureRow
-			Layout.fillWidth: true
+			anchors.right: parent.right
 			spacing: parent.spacingVal
 
 			Image {
@@ -205,15 +206,15 @@ Rectangle {
 	function setCurrWeatherParams(location, data)
 	{
 		_locationTxt.text = location
-		/*_temperatureTxt.text = Math.round(data.main.temp) + '°'
+		_temperatureTxt.text = Math.round(data.main.temp) + '°'
 		_descriptionTxt.text = Utils.convertFirstCharToUpperCase(
-			data.weather[0].description)*/
+			data.weather[0].description)
 		var pressureVal = data.main.pressure * 0.75
 		_pressureValueTxt.text = parseInt(pressureVal, 10)
 		_humidityValueTxt.text = data.main.humidity
 		_windVelocityTxt.text = data.wind.speed.toFixed(1)
 		_windDirectionImgRotation.angle = data.wind.deg
-		/*_weatherMainImg.source = 'qrc:///images/main/' +
-			Utils.getWeatherIcon(data.weather[0].icon) + '.png'*/
+		_weatherMainImg.source = 'qrc:///images/main/' +
+			Utils.getWeatherIcon(data.weather[0].icon) + '.png'
 	}
 }
