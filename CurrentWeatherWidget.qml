@@ -12,6 +12,11 @@ Rectangle {
 	// Set background.
 	Rectangle {
 		anchors.fill: parent
+		border {
+			color: "#adadad"
+			width: 1
+		}
+
 		color: "#d7d7d7"
 		//opacity: 0.3
 		radius: 3
