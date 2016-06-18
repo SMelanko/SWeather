@@ -13,7 +13,7 @@ Rectangle {
 	Rectangle {
 		anchors.fill: parent
 		color: "#d7d7d7"
-		opacity: 0.3
+		//opacity: 0.3
 		radius: 3
 	}
 
@@ -42,33 +42,25 @@ Rectangle {
 			left: parent.left
 			top: _locationRowLayout.bottom
 			right: parent.right
-			bottom: _paramsRowLayout.top
+			bottom: _descrRowLayout.top
 		}
 
-		ColumnLayout {
-			id: _leftParamsColLayout
+		// Temperature.
+		Item {
+			id: _tempItem
 			anchors {
 				left: parent.left
 				top: parent.top
-				right: _mainRowLayout.horizontalCenter
+				right: parent.horizontalCenter
 				bottom: parent.bottom
 			}
-			spacing: 2
 
-			// Temperature.
 			Text {
 				id: _temperatureTxt
+				anchors.centerIn: parent
 				color: "#c77e35"
 				font {
-					pixelSize: _leftParamsColLayout.height * 0.6
-				}
-			}
-
-			// Description.
-			Text {
-				id: _descriptionTxt
-				font {
-					pixelSize: _leftParamsColLayout.height * 0.2
+					pixelSize: _mainRowLayout.height * 0.6
 				}
 			}
 		}
@@ -76,12 +68,31 @@ Rectangle {
 		Image {
 			id: _weatherMainImg
 			anchors {
-				left: _leftParamsColLayout.right
+				left: _tempItem.right
 				top: parent.top
 				right: parent.right
 				bottom: parent.bottom
 			}
 			fillMode: Image.PreserveAspectFit
+		}
+	}
+
+	RowLayout {
+		id: _descrRowLayout
+		anchors {
+			left: parent.left
+			right: parent.right
+			bottom: _paramsRowLayout.top
+		}
+		height: parent.height * 0.15
+
+		// Description.
+		Text {
+			id: _descriptionTxt
+			anchors.horizontalCenter: parent.horizontalCenter
+			font {
+				pixelSize: _descrRowLayout.height * 0.9
+			}
 		}
 	}
 
@@ -93,11 +104,11 @@ Rectangle {
 			bottom: parent.bottom
 			margins: 5
 		}
-		height: parent.height * 0.1
+		height: parent.height * 0.15
 
 		readonly property int spacingVal: 4
-		readonly property int paramFontSize: height * 0.9
-		readonly property int measureFontSize: height * 0.7
+		readonly property int paramFontSize: parent.height * 0.1 * 0.9
+		readonly property int measureFontSize: parent.height * 0.1 * 0.7
 
 		// Wind.
 		Row {

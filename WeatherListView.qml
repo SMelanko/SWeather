@@ -54,6 +54,7 @@ Rectangle {
 				}
 
 				Image {
+					//width: _delegate.height; height: _delegate.height
 					fillMode: Image.PreserveAspectFit
 					source: icon
 				}
