@@ -9,8 +9,12 @@ Rectangle {
 	// Set background.
 	Rectangle {
 		anchors.fill: parent
+		border {
+			color: "#adadad"
+			width: 1
+		}
+
 		color: "#d7d7d7"
-		opacity: 0.3
 		radius: 3
 	}
 
@@ -31,52 +35,47 @@ Rectangle {
 			width: _listViewRect.width; height: _listViewRect.height / 5
 			Row {
 				id: _delegateRow
+				anchors.fill: parent
 				anchors.verticalCenter: parent.verticalCenter
-				leftPadding: 10
-				spacing: 25
 
 				Text {
-					height: _delegateRow.height
+					width: parent.width / 4; height: _delegateRow.height
 					font {
 						pixelSize: _delegate.height / 2
 					}
 					text: time
 					verticalAlignment: Text.AlignVCenter
+					horizontalAlignment: Text.AlignHCenter
 				}
 
 				Text {
-					height: _delegateRow.height
+					width: parent.width / 4; height: _delegateRow.height
 					font {
 						pixelSize: _delegate.height / 3
 					}
 					text: date
 					verticalAlignment: Text.AlignVCenter
+					horizontalAlignment: Text.AlignHCenter
 				}
 
-				Image {
-					//width: _delegate.height; height: _delegate.height
-					fillMode: Image.PreserveAspectFit
-					source: icon
+				Rectangle {
+					width: parent.width / 4; height: _delegate.height
+					color: "transparent"
+					Image {
+						anchors.centerIn: parent
+						fillMode: Image.PreserveAspectFit
+						source: icon
+					}
 				}
 
-				Row {
-					Text {
-						height: _delegateRow.height
-						font {
-							pixelSize: _delegate.height / 2
-						}
-						text: temperature
-						verticalAlignment: Text.AlignVCenter
+				Text {
+					width: parent.width / 4; height: _delegateRow.height
+					font {
+						pixelSize: _delegate.height / 2
 					}
-
-					Text {
-						height: _delegateRow.height
-						font {
-							pixelSize: _delegate.height / 2
-						}
-						text: "°"
-						verticalAlignment: Text.AlignVCenter
-					}
+					text: temperature
+					verticalAlignment: Text.AlignVCenter
+					horizontalAlignment: Text.AlignHCenter
 				}
 			}
 
@@ -86,7 +85,7 @@ Rectangle {
 					bottom: parent.bottom
 				}
 				width: parent.width; height: 1
-				color: "#d7d7d7"
+				color: "#adadad"
 			}
 		}
 
@@ -124,7 +123,7 @@ Rectangle {
 			date: dt.getDate() + ', ' + Utils.getMonthNameFromDate(dt),
 			icon: 'qrc:///images/list/' +
 				Utils.getWeatherIcon(data.weather[0].icon) + '.png',
-			temperature: Math.round(data.main.temp)
+			temperature: '' + Math.round(data.main.temp) + '°'
 		})
 	}
 }

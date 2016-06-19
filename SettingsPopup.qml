@@ -26,32 +26,33 @@ Popup {
 			spacing: 10
 
 			Label {
-				text: "Option:"
+				text: "Temperature unit:"
 			}
 
 			ComboBox {
 				id: _optionBox
-				model: ["Option 1", "Option 2", "Option 3"]
+				model: ["Celsius, °C", "Fahrenheit, °F", "Kelvin, K"]
 				Layout.fillWidth: true
 			}
 		}
 
 		GroupBox {
-			title: "Title"
+			title: "Wind speed"
 			Layout.fillWidth: true
 
-			Column {
+			Row {
+				anchors.centerIn: parent
 				spacing: 10
 
 				RadioButton {
-					text: "First"
+					text: "m/s"
 					checked: true
 				}
 				RadioButton {
-					text: "Second"
+					text: "km/h"
 				}
 				RadioButton {
-					text: "Third"
+					text: "mph"
 				}
 			}
 		}

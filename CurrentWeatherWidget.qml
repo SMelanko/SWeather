@@ -18,7 +18,6 @@ Rectangle {
 		}
 
 		color: "#d7d7d7"
-		//opacity: 0.3
 		radius: 3
 	}
 
@@ -107,11 +106,11 @@ Rectangle {
 			left: parent.left
 			right: parent.right
 			bottom: parent.bottom
-			margins: 5
+			margins: 3
 		}
 		height: parent.height * 0.15
 
-		readonly property int spacingVal: 4
+		readonly property int spacingVal: 2
 		readonly property int paramFontSize: parent.height * 0.1 * 0.9
 		readonly property int measureFontSize: parent.height * 0.1 * 0.7
 
