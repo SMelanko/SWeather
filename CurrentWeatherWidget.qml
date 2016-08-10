@@ -64,7 +64,7 @@ Rectangle {
 				anchors.centerIn: parent
 				color: "#c77e35"
 				font {
-					pixelSize: _mainRowLayout.height * 0.6
+					pixelSize: _mainRowLayout.height * 0.65
 				}
 			}
 		}
