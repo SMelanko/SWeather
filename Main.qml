@@ -1,10 +1,7 @@
-import QtQuick 2.5
+import QtQuick 2.7
+import QtQuick.Controls 2.0
 import QtQuick.Dialogs 1.2
-import QtQuick.Layouts 1.3
-import QtQuick.Controls.Styles 1.4
-import Qt.labs.controls 1.0
-import Qt.labs.controls.material 1.0
-import QtQuick.Window 2.2
+import QtQuick.Layouts 1.0
 
 import "Utils.js" as Utils
 
@@ -23,48 +20,7 @@ ApplicationWindow {
 
 	Component.onCompleted: {
 		httpRequest()
-
-		console.log("pixel density: " +
-			Screen.pixelDensity.toFixed(2) + " dots/mm (" +
-			(Screen.pixelDensity * 25.4).toFixed(2) + " dots/inch)")
-		console.log("dimensions: " + Screen.width + "x" + Screen.height)
-		console.log("logical pixel density: " +
-			Screen.logicalPixelDensity.toFixed(2) + " dots/mm (" +
-			(Screen.logicalPixelDensity * 25.4).toFixed(2) + " dots/inch)")
-		console.log("device pixel ratio: " + Screen.devicePixelRatio.toFixed(2))
-		console.log("available virtual desktop: " +
-			Screen.desktopAvailableWidth + "x" + Screen.desktopAvailableHeight)
 	}
-
-	/*
-		// Work
-		qml: pixel density: 3.76 dots/mm (95.60 dots/inch)
-		qml: dimensions: 1920x1080
-		qml: logical pixel density: 3.78 dots/mm (96.00 dots/inch)
-		qml: device pixel ratio: 1.00
-		qml: available virtual desktop: 3200x1053
-		// Mac
-		qml: pixel density: 4.47 dots/mm (113.50 dots/inch)
-		qml: dimensions: 1280x800
-		qml: logical pixel density: 2.83 dots/mm (72.00 dots/inch)
-		qml: device pixel ratio: 2.00
-		qml: available virtual desktop: 1280x730
-		// Nexus 5
-		qml: pixel density: 5.81 dots/mm (147.45 dots/inch)
-		qml: dimensions: 360x592
-		qml: logical pixel density: 2.83 dots/mm (72.00 dots/inch)
-		qml: device pixel ratio: 3.00
-		// Nexus 7 (1280 x 800)
-		qml: pixel density: 6.31 dots/mm (160.16 dots/inch)
-		qml: dimensions: 601x905
-		qml: logical pixel density: 2.83 dots/mm (72.00 dots/inch)
-		qml: device pixel ratio: 1.33
-		// iphone 6s simulator
-		qml: pixel density: 6.42 dots/mm (163.00 dots/inch)
-		qml: dimensions: 375x667
-		qml: logical pixel density: 2.83 dots/mm (72.00 dots/inch)
-		qml: device pixel ratio: 2.00
-	*/
 
 	header: Rectangle {
 		id: _header
@@ -74,55 +30,70 @@ ApplicationWindow {
 			GradientStop { position: 1.0; color: "#4c4c4c" }
 		}
 
-		RowLayout {
-			spacing: 20
-			anchors.fill: parent
+		Rectangle {
+			anchors {
+				left: _header.left
+				leftMargin: 10
+				verticalCenter: _header.verticalCenter
+			}
+			width: _header.width * 0.1; height: _header.height * 0.8
+			color: "transparent"
 
-			ToolButton {
-				label: Image {
-					anchors.centerIn: parent
-					source: "qrc:///images/update.png"
-				}
-
-				onClicked: {
-					httpRequest()
-				}
+			Image {
+				anchors.centerIn: parent
+				source: "qrc:///images/update.png"
 			}
 
-			Text {
-				id: _title
-				color: "#357ec7"
-				font {
-					pointSize: 36
-				}
-				text: "SWeather"
-				horizontalAlignment: Qt.AlignHCenter
-				verticalAlignment: Qt.AlignVCenter
-				Layout.fillWidth: true
+			MouseArea {
+				anchors.fill: parent
+				onClicked: httpRequest()
+			}
+		}
+
+		Text {
+			anchors.centerIn: _header
+			id: _title
+			color: "#357ec7"
+			font {
+				pointSize: 36
+			}
+			text: "SWeather"
+		}
+
+		Rectangle {
+			anchors {
+				right: _header.right
+				rightMargin: 10
+				verticalCenter: _header.verticalCenter
+			}
+			width: _header.width * 0.1; height: _header.height * 0.8
+			color: "transparent"
+
+			Image {
+				anchors.centerIn: parent
+				source: "qrc:///images/menu.png"
 			}
 
-			ToolButton {
-				label: Image {
-					anchors.centerIn: parent
-					source: "qrc:///images/menu.png"
-				}
+			MouseArea {
+				anchors.fill: parent
 				onClicked: _optionsMenu.open()
+			}
+/*
+			Menu {
+				id: _optionsMenu
+				x: parent.width - width
+				transformOrigin: Menu.TopRight
 
-				Menu {
-					id: _optionsMenu
-					x: parent.width - width
-					transformOrigin: Menu.TopRight
-
-					MenuItem {
-						text: "Settings"
-						onTriggered: _settingsPopup.open()
-					}
-					MenuItem {
-						text: "About"
-						onTriggered: _aboutPopup.open()
-					}
+				MenuItem {
+					text: "Settings"
+					onTriggered: _settingsPopup.open()
+				}
+				MenuItem {
+					text: "About"
+					onTriggered: _aboutPopup.open()
 				}
 			}
+*/
 		}
 	}
 
@@ -196,7 +167,7 @@ ApplicationWindow {
 	}
 
 	onResponseReceived: {
-		//console.log(response)
+		console.log(response)
 		var data = JSON.parse(response)
 		var location = data.city.name + ', ' + data.city.country
 
@@ -234,7 +205,7 @@ ApplicationWindow {
 
 	function httpRequest() {
 		var request = makeRequestUrl(cityId, apiKey, units)
-		//console.log(request)
+		console.log(request)
 		getResponse(request)
 	}
 
